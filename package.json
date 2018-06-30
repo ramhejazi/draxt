@@ -1,0 +1,37 @@
+{
+  "name": "draxt",
+  "version": "0.1.0",
+  "description": "jQuery/NodeList-like library for file system (nodejs)",
+	"author": "Ram Hejazi",
+  "main": "src/draxt.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramhejazi/draxt.git"
+  },
+  "keywords": [
+    "fs",
+		"file",
+    "file system",
+    "directory",
+    "folder",
+    "read",
+    "write",
+    "move",
+    "mv",
+    "cp",
+    "copy",
+    "jquery",
+    "node",
+    "chainable",
+    "collection",
+    "utility"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ramhejazi/draxt/issues"
+  },
+  "homepage": "https://github.com/ramhejazi/draxt#readme"
+}
