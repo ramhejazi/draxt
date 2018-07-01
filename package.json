@@ -2,7 +2,7 @@
   "name": "draxt",
   "version": "0.1.0",
   "description": "jQuery/NodeList-like library for file system (nodejs)",
-	"author": "Ram Hejazi",
+  "author": "Ram Hejazi",
   "main": "src/draxt.js",
   "scripts": {
     "test": "npm test"
@@ -13,7 +13,7 @@
   },
   "keywords": [
     "fs",
-		"file",
+    "file",
     "file system",
     "directory",
     "folder",
@@ -33,5 +33,9 @@
   "bugs": {
     "url": "https://github.com/ramhejazi/draxt/issues"
   },
-  "homepage": "https://github.com/ramhejazi/draxt#readme"
+  "homepage": "https://github.com/ramhejazi/draxt#readme",
+  "dependencies": {
+    "fs-extra": "^6.0.1",
+    "glob": "^7.1.2"
+  }
 }
