@@ -6,14 +6,14 @@ const
 	{ Directory, File } = Node,
 	fs = require('fs-extra'),
 	path = require('path'),
-	shouldNotPass = () => { throw new Error('should not pass!') }
+	shouldNotPass = function() { throw new Error('should not pass!') }
 ;
 
-describe('Node', () => {
-	describe('initialization and basic methods', () => {
+describe('Node', function() {
+	describe('initialization and basic methods', function() {
 		const nodePath = '/fake/_fakepath/module.js'
 		const stats = {}
-		it('`new`', () => {
+		it('`new`', function() {
 			const node = new Node(nodePath, stats);
 			expect(node.pathName).to.eql(nodePath);
 			expect(node.extension).to.eql('js');
@@ -24,7 +24,7 @@ describe('Node', () => {
 			expect(node.getCachedStats() === stats).to.eql(true);
 		});
 
-		it('path.parse methods', () => {
+		it('path.parse methods', function() {
 			const node = new Node(nodePath, stats);
 			expect(node.getPathName()).to.eql(nodePath);
 			expect(node.getExtension()).to.eql('js');
@@ -39,8 +39,8 @@ describe('Node', () => {
 		});
 	});
 
-	describe('fs module methods', () => {
-		beforeEach(() => {
+	describe('fs module methods', function() {
+		beforeEach(function() {
 			mockFs({
 				'/fake_dir': {
 					'example_file.md': 'example content.',
@@ -63,11 +63,11 @@ describe('Node', () => {
 			});
 		});
 
-		afterEach(() => {
+		afterEach(function() {
 			mockFs.restore();
 		});
 
-		it('.getPermissions()', () => {
+		it('.getPermissions()', function() {
 			const node = new Node('/fake_dir/example_file.md');
 			expect(() => node.getPermissions()).to.throw('renewStats');
 			const perms = node.chmodSync('700').renewStatsSync().getPermissions();
@@ -84,7 +84,7 @@ describe('Node', () => {
 			});
 		});
 
-		it('.getAccessTime() && .getBirthTime() && .getModifiedTime() && .getChangeTime()', () => {
+		it('.getAccessTime() && .getBirthTime() && .getModifiedTime() && .getChangeTime()', function() {
 			const node = new Node('/fake_dir/example_file.md');
 			node.renewStatsSync();
 			expect(node.getBirthTime()).to.eql(node._stats.birthtime);
@@ -93,7 +93,7 @@ describe('Node', () => {
 			expect(node.getModifiedTime()).to.eql(node._stats.mtime);
 		});
 
-		it('.__resolvePath()', () => {
+		it('.__resolvePath()', function() {
 			const node = new Node('/fake_dir/example_file.md');
 			expect(node.__resolvePath('/foo/bar')).to.eql('/foo/bar/example_file.md');
 			expect(node.__resolvePath('/foo/bar/')).to.eql('/foo/bar/example_file.md');
@@ -103,14 +103,14 @@ describe('Node', () => {
 			expect(() => node.__resolvePath()).to.throw('required');
 		});
 
-		it('.renewStats() && .renewStatsSync()', () => {
+		it('.renewStats() && .renewStatsSync()', function() {
 			const node = new Node('/fake_dir/example_file.md');
 			expect(node._stats).to.eql();
 			expect(node.renewStatsSync()).to.eql(node);
 			expect(node._stats).to.be.instanceof(fs.Stats);
 			const oldCache = node._stats;
 			node._stats = null;
-			return node.renewStats().then(() => {
+			return node.renewStats().then(function() {
 				expect(node._stats).to.be.instanceof(fs.Stats);
 				expect(node._stats === oldCache).to.eql(false);
 				expect(node.getSize()).to.eql(node._stats.size);
@@ -122,7 +122,7 @@ describe('Node', () => {
 			const node2 = new Node('/fake_dir/does_not_exist.md', {});
 			expect(node.accessSync()).to.eql(node);
 			expect(() => node2.accessSync()).to.throw();
-			return node.access().then(() => {
+			return node.access().then(function() {
 				return node2.access().then(shouldNotPass).catch(e => {
 					expect(e.message).to.include('ENOENT');
 				});
@@ -137,17 +137,17 @@ describe('Node', () => {
 			expect(node.lchmodSync('700')).to.eql(node);
 			node.renewStatsSync();
 			expect(node.getOctalPermissions()).to.eql('700');
-			return node.chmod('711').then(() => {
+			return node.chmod('711').then(function() {
 				node.renewStatsSync();
 				expect(node.getOctalPermissions()).to.eql('711');
-				return node.lchmod('777').then(() => {
+				return node.lchmod('777').then(function() {
 					node.renewStatsSync();
 					expect(node.getOctalPermissions()).to.eql('777');
 				});
 			});
 		});
 
-		it('.chown() && .chownSync() && .lchown() && .lchownSync()', () => {
+		it('.chown() && .chownSync() && .lchown() && .lchownSync()', function() {
 			const node = new Node('/fake_dir/example_file.md', {});
 			expect(node.chownSync(10, 11)).to.eql(node);
 			node.renewStatsSync();
@@ -158,11 +158,11 @@ describe('Node', () => {
 			node.renewStatsSync();
 			expect(node._stats.uid).to.eql(20);
 			expect(node._stats.gid).to.eql(22);
-			return node.chown(30, 33).then(() => {
+			return node.chown(30, 33).then(function() {
 				node.renewStatsSync();
 				expect(node._stats.uid).to.eql(30);
 				expect(node._stats.gid).to.eql(33);
-				return node.lchown(40, 44).then(() => {
+				return node.lchown(40, 44).then(function() {
 					node.renewStatsSync();
 					expect(node._stats.uid).to.eql(40);
 					expect(node._stats.gid).to.eql(44);
@@ -170,7 +170,7 @@ describe('Node', () => {
 			});
 		});
 
-		it('.exists() && .existsSync()', () => {
+		it('.exists() && .existsSync()', function() {
 			const node = new Node('/fake_dir/example_file.md', {});
 			const node2 = new Node('/fake_dir/does_not_exist.md', {});
 			expect(node.existsSync()).to.eql(true);
@@ -183,7 +183,7 @@ describe('Node', () => {
 			});
 		});
 
-		it('.stat() && .statSync() && .lstat() && .lstatSync() ', () => {
+		it('.stat() && .statSync() && .lstat() && .lstatSync() ', function() {
 			const node = new Node('/fake_dir/example_file.md', {});
 			expect(node.statSync()).to.be.an.instanceof(fs.Stats);
 			expect(node.lstatSync()).to.be.an.instanceof(fs.Stats);
@@ -195,7 +195,7 @@ describe('Node', () => {
 			});
 		});
 
-		it('.link() && .linkSync()', () => {
+		it('.link() && .linkSync()', function() {
 			const node = new Node('/fake_dir/example_file.md', {});
 			const nodeLink = new Node('/fake_dir/example_file_link.md');
 			const nodeLink2 = new Node('/fake_dir/example_file_link2.md');
@@ -204,12 +204,12 @@ describe('Node', () => {
 			expect(nodeLink2.existsSync()).to.eql(false);
 			expect(node.linkSync(nodeLink.pathName)).to.eql(node);
 			expect(nodeLink.existsSync()).to.eql(true);
-			return node.link(nodeLink2.pathName).then(() => {
+			return node.link(nodeLink2.pathName).then(function() {
 				expect(nodeLink2.existsSync()).to.eql(true);
 			})
 		});
 
-		it('.rename() && .renameSync()', () => {
+		it('.rename() && .renameSync()', function() {
 			const node = new Node('/fake_dir/example_file.md', {});
 			const renameSampleNode = new Node('/fake_dir/another_dir/example_file.js', {});
 			const renameSampleNodeAsync = new Node('/fake_dir/another_dir/new_name.md', {});
@@ -219,13 +219,13 @@ describe('Node', () => {
 			expect(renameSampleNode.existsSync()).to.eql(true);
 			expect(node.pathName).to.eql(renameSampleNode.pathName);
 			expect(node.getExtension()).to.eql('js');
-			return node.rename(renameSampleNodeAsync.pathName).then(() => {
+			return node.rename(renameSampleNodeAsync.pathName).then(function() {
 				expect(renameSampleNodeAsync.existsSync()).to.eql(true);
 				expect(node.pathName).to.eql(renameSampleNodeAsync.pathName);
 			});
 		});
 
-		it('.utimes() && .utimesSync()', () => {
+		it('.utimes() && .utimesSync()', function() {
 			const node = new Node('/fake_dir/example_file.md');
 			const atime = 1529607246; // Thursday, June 21, 2018 6:54:06 PM
 			const mtime = 1529520846; // Wednesday, June 20, 2018 6:54:06 PM
@@ -233,7 +233,7 @@ describe('Node', () => {
 			node.renewStatsSync();
 			expect(node.getStatProp('atimeMs') / 1000).to.eql(atime);
 			expect(node.getStatProp('mtimeMs') / 1000).to.eql(mtime);
-			return node.utimes(atime - 2000, mtime - 2000).then(() => {
+			return node.utimes(atime - 2000, mtime - 2000).then(function() {
 				node.renewStatsSync();
 				expect(node.getStatProp('atimeMs') / 1000).to.eql(atime - 2000);
 				expect(node.getStatProp('mtimeMs') / 1000).to.eql(mtime - 2000);
@@ -243,7 +243,7 @@ describe('Node', () => {
 	});
 
 	describe('Utility methods', function() {
-		beforeEach(() => {
+		beforeEach(function() {
 			mockFs({
 				'/fake_dir': {
 					'example_file.md': 'example content.',
@@ -272,11 +272,11 @@ describe('Node', () => {
 			});
 		});
 
-		afterEach(() => {
+		afterEach(function() {
 			mockFs.restore();
 		});
 
-		it('.__normalizeGlobOptions()', () => {
+		it('.__normalizeGlobOptions()', function() {
 			const o1 = Node.__normalizeGlobOptions();
 			expect(o1).to.eql({
 				absolute: true
@@ -295,7 +295,7 @@ describe('Node', () => {
 			});
 		});
 
-		it('.__statsToNode()', () => {
+		it('.__statsToNode()', function() {
 			const mockStats = (type) => {
 				return {
 					isFile() { return type === 'File' },
@@ -316,7 +316,7 @@ describe('Node', () => {
 			});
 		});
 
-		it('.toNodes() && .toNodesSync()', () => {
+		it('.toNodes() && .toNodesSync()', function() {
 			const paths = [
 				'/fake_dir/another_dir',
 				'/fake_dir/another_dir/g.md',
@@ -341,7 +341,7 @@ describe('Node', () => {
 			});
 		});
 
-		(() => {
+		(function() {
 			const rawExpected1 = [
 				'/fake_dir/another_dir',
 				'/fake_dir/another_example_file.md',
@@ -364,7 +364,7 @@ describe('Node', () => {
 				'/fake_dir/store',
 				'/fake_dir/store/c.php'
 			];
-			it('.rawQuery() && .rawQuerySync()', () => {
+			it('.rawQuery() && .rawQuerySync()', function() {
 				// result seem to be sorted by default
 				expect(Node.rawQuerySync('*', '/fake_dir')).to.eql(rawExpected1);
 				const result2 = Node.rawQuerySync('**', {
@@ -379,7 +379,7 @@ describe('Node', () => {
 				});
 			});
 
-			it('.query() && .querySync()', () => {
+			it('.query() && .querySync()', function() {
 				const result1 = Node.querySync('*', '/fake_dir');
 				expect(result1).to.be.an('array');
 				expect(result1.length).to.eql(rawExpected1.length);
@@ -397,7 +397,7 @@ describe('Node', () => {
 			});
 		})();
 
-		it('.remove() && .removeSync()', () => {
+		it('.remove() && .removeSync()', function() {
 			const node = new Node('/fake_dir/example_file.md');
 			const node2 = new Node('/fake_dir/another_example_file.md');
 			expect(node.existsSync()).to.eql(true);
@@ -405,12 +405,12 @@ describe('Node', () => {
 			expect(node.existsSync()).to.eql(false);
 
 			expect(node2.existsSync()).to.eql(true);
-			return node2.remove().then(() => {
+			return node2.remove().then(function() {
 				expect(node2.existsSync()).to.eql(false);
 			});
 		});
 
-		it('.parent() && .parentSync()', () => {
+		it('.parent() && .parentSync()', function() {
 			const node = new Node('/fake_dir/example_file.md');
 			const parent = node.parentSync();
 			expect(parent).to.be.instanceof(Directory);
@@ -421,7 +421,7 @@ describe('Node', () => {
 			});
 		});
 
-		it('.siblings() && .siblingsSync()', () => {
+		it('.siblings() && .siblingsSync()', function() {
 			const node = new Node('/fake_dir/another_dir/c.php');
 			const s1 = node.siblingsSync();
 			expect(s1.length).to.eql(8);
@@ -456,15 +456,15 @@ describe('Node', () => {
 			});
 		});
 
-		it('.moveTo() && .moveToSync() && .appendTo() && .appendToSync()', () => {
+		it('.moveTo() && .moveToSync() && .appendTo() && .appendToSync()', function() {
 			const node = new Node('/fake_dir/another_dir/c.php');
 			expect(node.moveToSync('/fake_dir/another_dir/.git')).to.eql(node);
 			expect(node.pathName).to.eql('/fake_dir/another_dir/.git/c.php');
-			return node.moveTo('/fake_dir').then(() => {
+			return node.moveTo('/fake_dir').then(function() {
 				expect(node.pathName).to.eql('/fake_dir/c.php');
-				expect(() => node.moveTo('/fake_dir/', () => {})).to.throw('callback');
+				expect(() => node.moveTo('/fake_dir/', function() {})).to.throw('callback');
 				expect(() => node.appendToSync('/fake_dir/store')).to.throw('EEXIST');
-				return node.appendTo('/fake_dir/store', { overwrite: true }).then(() => {
+				return node.appendTo('/fake_dir/store', { overwrite: true }).then(function() {
 					expect(node.pathName).to.eql('/fake_dir/store/c.php');
 					expect(node.fs.readFileSync(node.pathName, 'utf8')).to.eql('c.php content!');
 				});
@@ -477,29 +477,29 @@ describe('Node', () => {
 	 * Exclude copy from others tests for creating example test files and directories
 	 * Reason: fs-extra is not fully compatible with mock-fs module!
 	 */
-	describe('.copy() && .copySync()', () => {
+	describe('.copy() && .copySync()', function() {
 		const nodePath = path.join(__dirname, '/test_dir/exmaple.node');
 		const copyPath = path.join(__dirname, '/test_dir/non_existent/copied.php');
 		const copyPath2 = path.join(__dirname, '/test_dir/copied.php');
-		beforeEach(() => {
+		beforeEach(function() {
 			fs.removeSync(path.join(__dirname, 'test_dir'));
 			fs.ensureFileSync(nodePath);
 			fs.writeFileSync(nodePath, 'example content!', 'utf8');
 		})
-		it('.copy() && .copySync', () => {
+		it('.copy() && .copySync', function() {
 			const node = new Node(nodePath);
 			expect(node.existsSync()).to.eql(true);
 			expect(node.copySync(copyPath)).to.eql(node);
 			expect(node.fs.readFileSync(copyPath, 'utf8')).to.eql(
 				'example content!'
 			);
-			return node.copy(copyPath2).then(() => {
+			return node.copy(copyPath2).then(function() {
 				expect(node.fs.readFileSync(copyPath2, 'utf8')).to.eql(
 					'example content!'
 				);
 			});
 		});
-		afterEach(() => {
+		afterEach(function() {
 			fs.removeSync(path.join(__dirname, 'test_dir'));
 		});
 	});

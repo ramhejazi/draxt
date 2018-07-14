@@ -5,8 +5,8 @@ const
 	{ Node } = draxt
 ;
 
-describe('draxt', () => {
-	beforeEach(() => {
+describe('draxt', function() {
+	beforeEach(function() {
 		mockFs({
 			'/fake_dir': {
 				'example_file.md': 'example content.',
@@ -21,11 +21,11 @@ describe('draxt', () => {
 		}, { createCwd: false });
 	});
 
-	afterEach(() => {
+	afterEach(function() {
 		mockFs.restore();
 	});
 
-	it('basic initialization', () => {
+	it('basic initialization', function() {
 		expect(draxt()).to.be.instanceof(draxt);
 		expect(draxt().length).to.eql(0);
 		expect(() => draxt(['str'])).to.throw('Invalid value for `items` parameter');
@@ -36,7 +36,7 @@ describe('draxt', () => {
 		expect(draxt.fn).to.eql(draxt.prototype);
 	});
 
-	it('initialization with query', () => {
+	it('initialization with query', function() {
 		const p = draxt('/fake_dir/*');
 		expect(p).to.be.instanceof(Promise);
 		return p.then(d => {
@@ -49,14 +49,14 @@ describe('draxt', () => {
 		});
 	});
 
-	it('.sync()', () => {
+	it('.sync()', function() {
 		const result = draxt.sync('/fake_dir');
 		expect(result).to.be.instanceof(draxt);
 		expect(result.length).to.eql(1);
 		expect(draxt.sync('/fake_dir/*').length).to.eql(3);
 	});
 
-	it('.extend()', () => {
+	it('.extend()', function() {
 		const exampleFunc = function() {
 			return 'exampleFunc';
 		}
@@ -67,7 +67,7 @@ describe('draxt', () => {
 		expect(draxt.fn.exampleFunc).to.eql(exampleFunc);
 	});
 
-	it('.add()', () => {
+	it('.add()', function() {
 		const d = draxt();
 		expect(d.length).to.eql(0);
 		const node = new Node('pathName');
@@ -87,7 +87,7 @@ describe('draxt', () => {
 		expect(d.length).to.eql(3);
 	});
 
-	it('.get()', () => {
+	it('.get()', function() {
 		const d = draxt.sync('/fake_dir/*');
 		const node = d.get();
 		expect(node).to.be.an('array');
@@ -95,20 +95,20 @@ describe('draxt', () => {
 		expect(d.get(0)).to.be.eql(d.items[0]);
 	});
 
-	it('.first() && .last()', () => {
+	it('.first() && .last()', function() {
 		const d = draxt.sync('/fake_dir/*');
 		expect(d.first()).to.eql(d.items[0]);
 		expect(d.last()).to.eql(d.items.pop());
 	});
 
-	it('.has()', () => {
+	it('.has()', function() {
 		const d = draxt.sync('/fake_dir/*');
 		expect(d.has('/fake_dir/another_dir')).to.eql(true);
 		expect(d.has(new Node('/fake_dir/another_dir'))).to.eql(true);
 		expect(d.has('/fake_dir/non_existent')).to.eql(false);
 	});
 
-	it('.slice()', () => {
+	it('.slice()', function() {
 		const d = draxt.sync('/fake_dir/**');
 		expect(d.length).to.eql(6);
 		const d2 = d.slice(0, 4);
@@ -119,7 +119,7 @@ describe('draxt', () => {
 		expect(d3.get(0)).to.be.instanceof(Node);
 	});
 
-	it('.filter()', () => {
+	it('.filter()', function() {
 		const d = draxt.sync('/fake_dir/**');
 		const d2 = d.filter(node => {
 			return node.isFile();
@@ -129,7 +129,7 @@ describe('draxt', () => {
 		expect(d2.length).to.eql(3);
 	});
 
-	it('.map()', () => {
+	it('.map()', function() {
 		const d = draxt.sync('/fake_dir/*');
 		const res = d.map(node => node.baseName);
 		expect(res.length).to.eql(d.length);
@@ -141,7 +141,7 @@ describe('draxt', () => {
 		]);
 	});
 
-	it('.mapAsync', () => {
+	it('.mapAsync', function() {
 		const d = draxt.sync('/fake_dir/*');
 		const res = d.mapAsync(node => {
 			return new Promise(res => {
@@ -158,7 +158,7 @@ describe('draxt', () => {
 		});
 	});
 
-	it('.each() && .forEach()', () => {
+	it('.each() && .forEach()', function() {
 		const d = draxt.sync('/fake_dir/*');
 		expect(d.each).to.be.eql(d.forEach);
 		const res = [];
@@ -170,7 +170,7 @@ describe('draxt', () => {
 		]);
 	});
 
-	it('.some', () => {
+	it('.some', function() {
 		const d = draxt.sync('/fake_dir/*');
 		const res = d.some(node => node.baseName === 'another_dir');
 		const res2 = d.some(node => node.baseName === 'non_existent');
@@ -178,7 +178,7 @@ describe('draxt', () => {
 		expect(res2).to.eql(false);
 	});
 
-	it('.sort() && .reverse()', () => {
+	it('.sort() && .reverse()', function() {
 		const d = draxt.sync('/fake_dir/*');
 		const originalNodesBackup = d.get().slice();
 		const res = d.sort((a, b) => {
@@ -196,35 +196,35 @@ describe('draxt', () => {
 		expect(d.items).to.eql(originalNodesBackup);
 	});
 
-	it('.directories()', () => {
+	it('.directories()', function() {
 		const d = draxt.sync('/fake_dir/**');
 		const dirs = d.directories();
 		expect(dirs.length).to.eql(2);
 		expect(dirs === d).to.eql(false);
 	});
 
-	it('.files()', () => {
+	it('.files()', function() {
 		const d = draxt.sync('/fake_dir/**');
 		const files = d.files();
 		expect(files.length).to.eql(3);
 		expect(files === d).to.eql(false);
 	});
 
-	it('.symlinks()', () => {
+	it('.symlinks()', function() {
 		const d = draxt.sync('/fake_dir/**');
 		const symlinks = d.symlinks();
 		expect(symlinks.length).to.eql(1);
 		expect(symlinks).to.be.instanceof(draxt);
 	});
 
-	it('.empty()', () => {
+	it('.empty()', function() {
 		const d = draxt.sync('/fake_dir/**');
 		expect(d.length).to.eql(6);
 		expect(d.empty()).to.eql(d);
 		expect(d.length).to.eql(0);
 	});
 
-	it('.drop()', () => {
+	it('.drop()', function() {
 		const d = draxt.sync('/fake_dir/**');
 		expect(d.length).to.eql(6);
 		d.drop('/fake_dir/example_file.md');

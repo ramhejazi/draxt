@@ -2,13 +2,13 @@
 const mockFs = require('mock-fs');
 const Draxt = require('../../src/draxt');
 const { Directory, File } = Draxt.Node;
-const shouldNotPass = () => { throw new Error('should not pass!') }
+const shouldNotPass = function() { throw new Error('should not pass!') }
 
-describe('Directory', () => {
-	describe('initialization and basic methods', () => {
+describe('Directory', function() {
+	describe('initialization and basic methods', function() {
 		const nodePath = '/fake/_fakepath'
 		const stats = {}
-		it('`new`', () => {
+		it('`new`', function() {
 			const node = new Directory(nodePath, stats);
 			expect(node.pathName).to.eql(nodePath);
 			expect(node.extension).to.eql('');
@@ -18,7 +18,7 @@ describe('Directory', () => {
 			expect(node.getCachedStats() === stats).to.eql(true);
 		});
 
-		it('path.parse methods', () => {
+		it('path.parse methods', function() {
 			const node = new Directory(nodePath, stats);
 			expect(node.getPathName()).to.eql(nodePath);
 			expect(node.getExtension()).to.eql('');
@@ -29,7 +29,7 @@ describe('Directory', () => {
 	});
 
 	describe('fs methods', function() {
-		beforeEach(() => {
+		beforeEach(function() {
 			mockFs({
 				'/fake_dir': {
 					'example_file.md': 'example content.',
@@ -52,11 +52,11 @@ describe('Directory', () => {
 			});
 		});
 
-		afterEach(() => {
+		afterEach(function() {
 			mockFs.restore();
 		});
 
-		it('.rmdir() & .rmdirSync() & .ensure() & .ensureSync()', () => {
+		it('.rmdir() & .rmdirSync() & .ensure() & .ensureSync()', function() {
 			const dir = new Directory('/fake_dir/empty_dir');
 			const dir2 = new Directory('/fake_dir/non_empty_dir');
 			expect(dir.existsSync()).to.eql(true);
@@ -69,11 +69,11 @@ describe('Directory', () => {
 			expect(dir.existsSync()).to.eql(true);
 
 			// rmdir should throw en error for non-empty dirs
-			expect(() => { dir2.rmdirSync() }).to.throw('ENOTEMPTY');
+			expect(function() { dir2.rmdirSync() }).to.throw('ENOTEMPTY');
 
-			return dir.rmdir().then(() => {
+			return dir.rmdir().then(function() {
 				expect(dir.existsSync()).to.eql(false);
-				return dir.ensure().then(() => {
+				return dir.ensure().then(function() {
 					expect(dir.existsSync()).to.eql(true);
 					expect(dir.renewStatsSync().isDirectory()).to.eql(true);
 					return dir2.rmdir().then(shouldNotPass).catch(e => {
@@ -83,7 +83,7 @@ describe('Directory', () => {
 			});
 		});
 
-		it('.readdir() & .readdirSync() & .read() & .readSync()', () => {
+		it('.readdir() & .readdirSync() & .read() & .readSync()', function() {
 			const dir = new Directory('/fake_dir/non_empty_dir');
 			const expected = [
 				'.git',
@@ -96,7 +96,7 @@ describe('Directory', () => {
 			});
 		});
 
-		it('isEmpty() & .isEmptySync()', () => {
+		it('isEmpty() & .isEmptySync()', function() {
 			const dir = new Directory('/fake_dir/empty_dir');
 			const dir2 = new Directory('/fake_dir/non_empty_dir');
 			expect(dir.isEmptySync()).to.eql(true);
@@ -109,7 +109,7 @@ describe('Directory', () => {
 			});
 		});
 
-		it('.empty() & .emptySync()', () => {
+		it('.empty() & .emptySync()', function() {
 			const expected = [
 				'.git',
 				'file.rb',
@@ -123,12 +123,12 @@ describe('Directory', () => {
 			expect(dir2.readSync()).to.eql([
 				'file.md'
 			]);
-			return dir2.empty().then(() => {
+			return dir2.empty().then(function() {
 				expect(dir2.readSync()).to.eql([]);
 			})
 		});
 
-		it('__normalizeAppendNodes', () => {
+		it('__normalizeAppendNodes', function() {
 			const method = Directory.__normalizeAppendNodes;
 			const d = Draxt([
 				new File('file.ext'),
@@ -144,7 +144,7 @@ describe('Directory', () => {
 			expect(() => method(new Date)).to.throw();
 		});
 
-		it('.append() & .appendSync()', () => {
+		it('.append() & .appendSync()', function() {
 			const col = [
 				new File('/fake_dir/non_empty_dir/file.rb'),
 				'/fake_dir/non_empty_dir/foo',
@@ -167,13 +167,13 @@ describe('Directory', () => {
 			const col2 = Draxt([
 				new File('/fake_dir/example_file.md'),
 			]);
-			return dir.append(col2).then(() => {
+			return dir.append(col2).then(function() {
 				expect(col2.get(0).pathName).eql('/fake_dir/empty_dir/example_file.md');
 				return dir.append('/fake_dir/non_empty_dir2');
 			});
 		});
 
-		it('.children() & .childrenSync()', () => {
+		it('.children() & .childrenSync()', function() {
 			const dir = new Directory('/fake_dir/non_empty_dir');
 			const ret = dir.childrenSync();
 			expect(ret).to.be.instanceof(Draxt);
@@ -195,7 +195,7 @@ describe('Directory', () => {
 			});
 		});
 
-		it('.find() & .findSync()', () => {
+		it('.find() & .findSync()', function() {
 			const dir = new Directory('/fake_dir');
 			const ret = dir.findSync('*');
 			expect(ret).to.be.instanceof(Draxt);
