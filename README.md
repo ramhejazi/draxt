@@ -75,12 +75,12 @@ const $ = require('draxt')
  ```
 
 ## Docs
-- [`draxt` APIs](https://github.com/ramhejazi/draxt/blob/master/src/docs/draxt.md)
+- [`draxt` APIs](https://github.com/ramhejazi/draxt/blob/master/docs/draxt.md)
 - Interfaces
-  - [`Node` class APIs](https://github.com/ramhejazi/draxt/blob/master/src/docs/Node.md)
-  - [`File` class APIs](https://github.com/ramhejazi/draxt/blob/master/src/docs/File.md)
-  - [`Directory` class APIs](https://github.com/ramhejazi/draxt/blob/master/src/docs/Directory.md)
-  - [`SymbolicLink` class APIs](https://github.com/ramhejazi/draxt/blob/master/src/docs/SymbolicLink.md)
+  - [`Node` class APIs](https://github.com/ramhejazi/draxt/blob/master/docs/Node.md)
+  - [`File` class APIs](https://github.com/ramhejazi/draxt/blob/master/docs/File.md)
+  - [`Directory` class APIs](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md)
+  - [`SymbolicLink` class APIs](https://github.com/ramhejazi/draxt/blob/master/docs/SymbolicLink.md)
 
 ## Test
 ```bash
