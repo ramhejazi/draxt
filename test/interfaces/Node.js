@@ -135,9 +135,9 @@ describe('Node', function() {
 			expect(node.chmodSync('755')).to.eql(node);
 			node.renewStatsSync();
 			expect(node.getOctalPermissions()).to.eql('755');
-			expect(node.lchmodSync('700')).to.eql(node);
+			expect(node.lchmodSync('755')).to.eql(node);
 			node.renewStatsSync();
-			expect(node.getOctalPermissions()).to.eql('700');
+			expect(node.getOctalPermissions()).to.eql('755');
 			return node.chmod('711').then(function() {
 				node.renewStatsSync();
 				expect(node.getOctalPermissions()).to.eql('711');
