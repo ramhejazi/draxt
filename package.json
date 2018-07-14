@@ -1,11 +1,13 @@
 {
   "name": "draxt",
-  "version": "0.1.0",
-  "description": "jQuery/NodeList-like library for file system (nodejs)",
+  "version": "0.2.0",
+  "description": "jQuery/NodeList-like module for file system (nodejs)",
   "author": "Ram Hejazi",
   "main": "src/draxt.js",
   "scripts": {
-    "test": "npm test"
+    "mkdoc": "node ./scripts/mkdoc.js",
+    "test": "nyc --reporter=text --reporter=html ./node_modules/mocha/bin/mocha test/* -r chai/register-expect",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -27,13 +29,14 @@
     "node",
     "chainable",
     "collection",
-    "utility"
+    "utility",
+    "plugin"
   ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ramhejazi/draxt/issues"
   },
-  "homepage": "https://github.com/ramhejazi/draxt#readme",
+  "homepage": "https://github.com/ramhejazi/draxt",
   "dependencies": {
     "fs-extra": "^6.0.1",
     "glob": "^7.1.2"
