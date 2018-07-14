@@ -9,9 +9,6 @@
 	<a href="https://coveralls.io/github/ramhejazi/draxt">
 		<img alt="draxt coverage status" src="https://coveralls.io/repos/github/ramhejazi/draxt/badge.svg">
 	</a>
-	<a href="https://packagephobia.now.sh/badge?p=draxt">
-		<img alt="draxt installation size" src="https://packagephobia.now.sh/badge?p=draxt">
-	</a>
 	<a href="https://github.com/ramhejazi/draxt/blob/master/LICENSE">
 		<img alt="draxt license" src="https://img.shields.io/npm/l/draxt.svg">
 	</a>
