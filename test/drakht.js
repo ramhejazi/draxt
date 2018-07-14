@@ -37,10 +37,7 @@ describe('draxt', function() {
 	});
 
 	it('initialization with query', function() {
-		const p = draxt('/fake_dir/*');
-		expect(p).to.be.instanceof(Promise);
-		this.timeout(15000);
-		return p.then(d => {
+		return draxt('/fake_dir/*').then(d => {
 			expect(d).to.be.instanceof(draxt);
 			expect(d.length).to.eql(3);
 			expect(draxt(d).items).to.eql(d.items);

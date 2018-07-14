@@ -6,7 +6,7 @@
   "main": "src/draxt.js",
   "scripts": {
     "mkdoc": "node ./scripts/mkdoc.js",
-    "test": "nyc --reporter=text --reporter=html ./node_modules/mocha/bin/mocha test/* -r chai/register-expect",
+    "test": "nyc --reporter=text --reporter=html ./node_modules/mocha/bin/mocha --timeout=15000 test/* -r chai/register-expect",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
