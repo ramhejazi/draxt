@@ -61,7 +61,7 @@ const $ = require('draxt')
 **Key notes**:
  - `draxt` has 2 dependencies: [`glob`](https://github.com/isaacs/node-glob) and [`fs-extra`](https://github.com/jprichardson/node-fs-extra) modules.
  - `draxt` uses `glob` patterns for selecting file system objects.
- - Each item in `draxt` collections is an instance of [`File`](https://github.com/ramhejazi/draxt/blob/master/src/docs/File.md), [`Directory`](https://github.com/ramhejazi/draxt/blob/master/src/docs/Directory.md), [`SymbolicLink`](https://github.com/ramhejazi/draxt/blob/master/src/docs/SymbolicLink.md) classes which are sub-classes of `Node` class.
+ - Each item in `draxt` collections is an instance of [`File`](https://github.com/ramhejazi/draxt/blob/master/docs/File.md), [`Directory`](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md), [`SymbolicLink`](https://github.com/ramhejazi/draxt/blob/master/docs/SymbolicLink.md) classes which are sub-classes of `Node` class.
 
 ## Install
  Installing via [npm](https://docs.npmjs.com/getting-started/what-is-npm):
