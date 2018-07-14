@@ -6,9 +6,6 @@
 	<a href="https://www.npmjs.com/package/draxt">
 		<img alt="draxt npm version" src="https://img.shields.io/npm/v/draxt.svg?style=flat-square">
 	</a>
-	<a href="https://www.npmjs.com/package/draxt">
-		<img alt="draxt downloads count" src="https://img.shields.io/npm/dt/draxt.svg?style=flat-square">
-	</a>
 	<a href="https://coveralls.io/github/ramhejazi/draxt">
 		<img alt="draxt coverage status" src="https://coveralls.io/repos/github/ramhejazi/draxt/badge.svg">
 	</a>
@@ -66,12 +63,12 @@ const $ = require('draxt')
 ## Install
  Installing via [npm](https://docs.npmjs.com/getting-started/what-is-npm):
  ```bash
- npm i draxt
+ $ npm i draxt
  ```
 
  Via [yarn](https://yarnpkg.com/en/) package manager:
  ```bash
- yarn add draxt
+ $ yarn add draxt
  ```
 
 ## Docs
@@ -84,7 +81,7 @@ const $ = require('draxt')
 
 ## Test
 ```bash
-npm test
+$ npm test
 ```
 
 ## License
