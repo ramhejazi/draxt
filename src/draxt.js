@@ -19,7 +19,7 @@ const lengthProps = {
  * selector engine. All query results of `glob` package are converted into one of `Node`'s sub-class
  * (`File`, `Directory` or `SymbolicLink`) instances by analyzing pathNames' `fs.Stats` object.
  * The returned value of `draxt` is a `draxt` collection
- * which somehow works like jQuery collections but unlike jQuery collections it's not an array-like object.
+ * which to some extent works like jQuery collections but unlike jQuery collections it's not an array-like object.
  * The collection items are stored as an array property (`.items`).
  * @prop {array} items Items of the collection.
  * @prop {number} length Lenght of collection's items.
@@ -217,11 +217,12 @@ Draxt.prototype.slice = function() {
 /**
  * Filter the collection's nodes and return a new `draxt` collection.
  * Uses `Array.prototype.filter`.
- * @param {function} fn A function to execute for each node.
+ * @param {function} callback A function to execute for each node.
+ * @param {any} [thisArg] Value to use as `this` (i.e the reference Object) when executing callback.
  * @returns {draxt} A new `draxt` collection which contains filtered items.
  */
-Draxt.prototype.filter = function(fn) {
-	let fItems = this.items.filter(fn);
+Draxt.prototype.filter = function() {
+	let fItems = this.items.filter(...arguments);
 	return new Draxt(fItems);
 }
 
@@ -229,11 +230,12 @@ Draxt.prototype.filter = function(fn) {
  * Iterate over the `draxt` collection and execute a function for each
  * node. Uses `Array.prototype.forEach`.
  * @chainable
- * @param {function} fn A function to execute for each node.
- * @returns {draxt}
+ * @param {function} callback A function to execute for each node.
+ * @param {any} [thisArg] Value to use as `this` (i.e the reference Object) when executing callback.
+ * @returns {draxt} The current collection.
  */
-Draxt.prototype.forEach = function(fn) {
-	this.items.forEach(fn);
+Draxt.prototype.forEach = function() {
+	this.items.forEach(...arguments);
 	return this;
 }
 
@@ -246,7 +248,8 @@ Draxt.prototype.each = Draxt.prototype.forEach;
  * Create an array with the results of calling a provided function on every
  * node in the `draxt` collection.
  * Uses `Array.prototype.map`.
- * @param {function} fn A function to execute for each node.
+ * @param {function} callback A function to execute for each node.
+ * @param {any} [thisArg] Value to use as `this` (i.e the reference Object) when executing callback.
  * @returns {array}
  */
 Draxt.prototype.map = function() {
@@ -257,6 +260,7 @@ Draxt.prototype.map = function() {
  * Asynchronous version of `draxt.map`. The results of mapped array is passed
  * to `Promise.all` method.
  * @param {function} fn A function to execute for each node.
+ * @param {any} [thisArg] Value to use as `this` (i.e the reference Object) when executing callback.
  * @returns {promise}
  */
 Draxt.prototype.mapAsync = function() {
@@ -277,7 +281,7 @@ Draxt.prototype.some = function() {
 /**
  * Sort the nodes of collection _in place_ and return the `draxt` collection.
  * Uses `Array.prototype.sort`.
- * @param {function} fn A function that defines the sort order.
+ * @param {function} callback A function that defines the sort order.
  * @returns {draxt} Note that the collection is sorted _in place_, and no copy is made.
  */
 Draxt.prototype.sort = function(fn) {
