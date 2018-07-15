@@ -15,9 +15,9 @@
 </div>
 <br>
 
-`draxt` is a jQuery-like utility module for selecting and manipulating file system's objects in node.js environment.
+`draxt` is a utility module for selecting and manipulating file system's objects in node.js environment.
 It uses [`glob`](https://en.wikipedia.org/wiki/Glob_(programming)) patterns as it's "selector engine". `draxt` also provides several DOM-like interfaces representing
-file system's objects that use promisified [`fs`](https://nodejs.org/api/fs.html) module's APIs.
+file system's objects that use promisified [`fs`](https://nodejs.org/api/fs.html) module and [`fs-extra`](https://github.com/jprichardson/node-fs-extra) module APIs.
 
 ```html
 /app
@@ -40,7 +40,7 @@ const $ = require('draxt')
     // Let's filter js files:
     .filter(node => node.extension === 'js')
     // Now we have a new `draxt` collection with 2 nodes.
-    .each(async (node) => {
+    .forEach(async (node) => {
       // `node` is instance of `File` class. Because it's a file!
       console.log(node instanceof $.File) // → `true`
       // Let's get contents of the node. `file.read` returns a promise object.
@@ -53,9 +53,20 @@ const $ = require('draxt')
 ```
 
 **Key notes**:
- - `draxt` has 2 dependencies: [`glob`](https://github.com/isaacs/node-glob) and [`fs-extra`](https://github.com/jprichardson/node-fs-extra) modules.
+ - `draxt` has only 2 dependencies: [`glob`](https://github.com/isaacs/node-glob) and [`fs-extra`](https://github.com/jprichardson/node-fs-extra) modules.
  - `draxt` uses `glob` patterns for selecting file system objects.
- - Each item in `draxt` collections is an instance of [`File`](https://github.com/ramhejazi/draxt/blob/master/docs/File.md), [`Directory`](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md), [`SymbolicLink`](https://github.com/ramhejazi/draxt/blob/master/docs/SymbolicLink.md) classes which are sub-classes of `Node` class.
+ - Each item in `draxt` collections is an instance of [`File`](https://github.com/ramhejazi/draxt/blob/master/docs/File.md), [`Directory`](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md), [`SymbolicLink`](https://github.com/ramhejazi/draxt/blob/master/docs/SymbolicLink.md) classes which are sub-classes of [`Node`](https://github.com/ramhejazi/draxt/blob/master/docs/Node.md) class.
+ - `draxt` is a simple constructor function. You can extend/overwrite it's methods via it's `prototype` property (or it's alias: `fn`) or by using the [`draxt.extend`](https://github.com/ramhejazi/draxt/blob/master/docs/draxt.md#draxtextendmethods) method.
+ ```js
+ const draxt = require('draxt');
+ // add a method (`images`) for filtering image files.
+ draxt.fn.images = function() {
+	 const imgExtensions = ['jpeg', 'jpg', 'png', 'git', ...];
+	 return this.filter(node => {
+		 return node.isFile() && imgExtensions.indexOf(node.extension) > -1;
+	 })
+ }
+ ```
 
 ## Install
  Installing via [npm](https://docs.npmjs.com/getting-started/what-is-npm):
@@ -75,6 +86,11 @@ const $ = require('draxt')
   - [`File` class APIs](https://github.com/ramhejazi/draxt/blob/master/docs/File.md)
   - [`Directory` class APIs](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md)
   - [`SymbolicLink` class APIs](https://github.com/ramhejazi/draxt/blob/master/docs/SymbolicLink.md)
+
+## Extending `draxt`
+```js
+
+```
 
 ## Test
 ```bash
