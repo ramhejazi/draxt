@@ -87,11 +87,6 @@ const $ = require('draxt')
   - [`Directory` class APIs](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md)
   - [`SymbolicLink` class APIs](https://github.com/ramhejazi/draxt/blob/master/docs/SymbolicLink.md)
 
-## Extending `draxt`
-```js
-
-```
-
 ## Test
 ```bash
 $ npm test
