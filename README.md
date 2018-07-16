@@ -19,6 +19,8 @@
 It uses [`glob`](https://en.wikipedia.org/wiki/Glob_(programming)) patterns as it's "selector engine". `draxt` also provides several DOM-like interfaces representing
 file system's objects that use promisified [`fs`](https://nodejs.org/api/fs.html) module and [`fs-extra`](https://github.com/jprichardson/node-fs-extra) module APIs.
 
+> _draxt_ means _tree_ in [Pahlavi language](https://en.wikipedia.org/wiki/Middle_Persian).
+
 ```html
 /app
  ├── controllers/
@@ -40,14 +42,20 @@ const $ = require('draxt')
     // Let's filter js files:
     .filter(node => node.extension === 'js')
     // Now we have a new `draxt` collection with 2 nodes.
-    .forEach(async (node) => {
+    .forEach(async (node, index, allNodes) => {
       // `node` is instance of `File` class. Because it's a file!
+      console.log(node.pathName); // → `/app/controllers/index.js` for the first node!
       console.log(node instanceof $.File) // → `true`
+
       // Let's get contents of the node. `file.read` returns a promise object.
       const content = await node.read('utf8');
       // Let's use some synchronous methods!
       node.appendSync('\na new line!')
-          .chmodSync('765');
+          .chmodSync('765')
+          // move the file into another directory!
+          .appendToSync('/hell'); // or `.moveTo('/hell')`
+
+      console.log(node.pathName) // → '/hell/index.js' for the first node in the list!
   });
 })();
 ```
@@ -56,17 +64,18 @@ const $ = require('draxt')
  - `draxt` has only 2 dependencies: [`glob`](https://github.com/isaacs/node-glob) and [`fs-extra`](https://github.com/jprichardson/node-fs-extra) modules.
  - `draxt` uses `glob` patterns for selecting file system objects.
  - Each item in `draxt` collections is an instance of [`File`](https://github.com/ramhejazi/draxt/blob/master/docs/File.md), [`Directory`](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md), [`SymbolicLink`](https://github.com/ramhejazi/draxt/blob/master/docs/SymbolicLink.md) classes which are sub-classes of [`Node`](https://github.com/ramhejazi/draxt/blob/master/docs/Node.md) class.
+ - Every asynchronous method has a synchronous version. E.g. [`node.siblingsSync()`](https://github.com/ramhejazi/draxt/blob/master/docs/Node.md#nodesiblingssyncpattern-options) for `node.siblings()`.
  - `draxt` is a simple constructor function. You can extend/overwrite it's methods via it's `prototype` property (or it's alias: `fn`) or by using the [`draxt.extend`](https://github.com/ramhejazi/draxt/blob/master/docs/draxt.md#draxtextendmethods) method.
  ```js
  const draxt = require('draxt');
  // add a method (`images`) for filtering image files.
  draxt.fn.images = function() {
-	 const imgExtensions = ['jpeg', 'jpg', 'png', 'git', ...];
-	 return this.filter(node => {
-		 return node.isFile() && imgExtensions.indexOf(node.extension) > -1;
-	 })
+     const imgExtensions = ['jpeg', 'jpg', 'png', 'git', ...];
+     return this.filter(node => {
+        return node.isFile() && imgExtensions.indexOf(node.extension) > -1;
+     })
  }
- ```
+```
 
 ## Install
  Installing via [npm](https://docs.npmjs.com/getting-started/what-is-npm):
