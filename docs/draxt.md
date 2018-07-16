@@ -57,7 +57,7 @@ const draxtCollection = draxt(new Directory('/app'));
 → `promise.<draxt> `|` draxt`
 <br><br>
 ## Methods
-#### [`draxt.sync(pattern [, options])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#111)
+#### [`draxt.sync(pattern [, options])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L111)
 - `pattern` (`string`)&nbsp;&nbsp;–&nbsp;&nbsp;Glob pattern.
 - `options` (`object`)&nbsp;&nbsp;–&nbsp;&nbsp;Options for [`glob`](https://github.com/isaacs/node-glob) package.
 
@@ -66,12 +66,12 @@ return a new [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt
 
 → `draxt` An instance of [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md), a.k.a. a _draxt collection_.
 <br><br>
-#### [`draxt.extend(methods)`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#120)
+#### [`draxt.extend(methods)`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L120)
 - `methods` (`object`)
 
 Extend [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) by adding methods to it's `prototype`. Basically works like `jQuery.fn.extend`.
 <br><br>
-#### [`draxtCollection.add(items)`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#134)
+#### [`draxtCollection.add(items)`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L134)
 - `items` (`node `|` array.<node> `|` draxt`)&nbsp;&nbsp;–&nbsp;&nbsp;Instance of Node or array of nodes or a [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection.
 
 Add node(s) to current [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection.
@@ -84,7 +84,7 @@ draxtCollection.length // → 1
 
 → `draxt` An instance of [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md).
 <br><br>
-#### [`draxtCollection.get([index])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#159)
+#### [`draxtCollection.get([index])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L159)
 - `index` (`number`)&nbsp;&nbsp;–&nbsp;&nbsp;Index of node in items collection.
 
 Get one or all nodes from the [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection.
@@ -93,17 +93,17 @@ retrives all the nodes (if any).
 
 → `array.<node> `|` node `|` undefined`
 <br><br>
-#### [`draxtCollection.first()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#170)
+#### [`draxtCollection.first()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L170)
 Get the first node (if any) from the collection.
 
 → `node `|` undefined`
 <br><br>
-#### [`draxtCollection.last()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#178)
+#### [`draxtCollection.last()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L178)
 Get the last node (if any) from the collection.
 
 → `node `|` undefined`
 <br><br>
-#### [`draxtCollection.has(item)`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#199)
+#### [`draxtCollection.has(item)`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L199)
 - `item` (`string `|` node`)&nbsp;&nbsp;–&nbsp;&nbsp;A [`Node`](https://github.com/ramhejazi/draxt/blob/master/docs/Node.md) instance or a `pathName`
 
 Does the [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection has a node with specified pathName?
@@ -123,7 +123,7 @@ draxtCollection.has(new Node('/app/public/script.js')) // → true
 
 → `boolean`
 <br><br>
-#### [`draxtCollection.slice([begin, end])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#212)
+#### [`draxtCollection.slice([begin, end])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L212)
 - `begin` (`integer`)&nbsp;&nbsp;–&nbsp;&nbsp;Zero-based index at which to begin extraction.
 - `end` (`integer`)&nbsp;&nbsp;–&nbsp;&nbsp;Zero-based index before which to end extraction. `slice` extracts up to but not including `end`.
 
@@ -132,7 +132,7 @@ Uses `Array.prototype.slice`.
 
 → `draxt` A new [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection which contains sliced items.
 <br><br>
-#### [`draxtCollection.filter(callback [, thisArg])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#224)
+#### [`draxtCollection.filter(callback [, thisArg])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L224)
 - `callback` (`function`)&nbsp;&nbsp;–&nbsp;&nbsp;A function to execute for each node.
 - `thisArg` (`any`)&nbsp;&nbsp;–&nbsp;&nbsp;Value to use as `this` (i.e the reference Object) when executing callback.
 
@@ -141,7 +141,7 @@ Uses `Array.prototype.filter`.
 
 → `draxt` A new [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection which contains filtered items.
 <br><br>
-#### [`draxtCollection.forEach(callback [, thisArg])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#237)
+#### [`draxtCollection.forEach(callback [, thisArg])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L237)
 - `callback` (`function`)&nbsp;&nbsp;–&nbsp;&nbsp;A function to execute for each node.
 - `thisArg` (`any`)&nbsp;&nbsp;–&nbsp;&nbsp;Value to use as `this` (i.e the reference Object) when executing callback.
 
@@ -150,10 +150,10 @@ node. Uses `Array.prototype.forEach`.
 
 → `draxt` The current collection.
 <br><br>
-#### [`draxtCollection.each()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#245)
+#### [`draxtCollection.each()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L245)
 Alias for `draxt.forEach`.
 <br><br>
-#### [`draxtCollection.map(callback [, thisArg])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#255)
+#### [`draxtCollection.map(callback [, thisArg])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L255)
 - `callback` (`function`)&nbsp;&nbsp;–&nbsp;&nbsp;A function to execute for each node.
 - `thisArg` (`any`)&nbsp;&nbsp;–&nbsp;&nbsp;Value to use as `this` (i.e the reference Object) when executing callback.
 
@@ -163,7 +163,7 @@ Uses `Array.prototype.map`.
 
 → `array`
 <br><br>
-#### [`draxtCollection.mapAsync(fn [, thisArg])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#266)
+#### [`draxtCollection.mapAsync(fn [, thisArg])`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L266)
 - `fn` (`function`)&nbsp;&nbsp;–&nbsp;&nbsp;A function to execute for each node.
 - `thisArg` (`any`)&nbsp;&nbsp;–&nbsp;&nbsp;Value to use as `this` (i.e the reference Object) when executing callback.
 
@@ -172,7 +172,7 @@ to `Promise.all` method.
 
 → `promise`
 <br><br>
-#### [`draxtCollection.some(fn)`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#277)
+#### [`draxtCollection.some(fn)`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L277)
 - `fn` (`function`)&nbsp;&nbsp;–&nbsp;&nbsp;A function to execute for each node.
 
 Test whether at least one node in the collection passes the test implemented
@@ -181,7 +181,7 @@ Uses `Array.prototype.some`.
 
 → `boolean`
 <br><br>
-#### [`draxtCollection.sort(callback)`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#287)
+#### [`draxtCollection.sort(callback)`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L287)
 - `callback` (`function`)&nbsp;&nbsp;–&nbsp;&nbsp;A function that defines the sort order.
 
 Sort the nodes of collection _in place_ and return the [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection.
@@ -189,34 +189,34 @@ Uses `Array.prototype.sort`.
 
 → `draxt` Note that the collection is sorted _in place_, and no copy is made.
 <br><br>
-#### [`draxtCollection.reverse()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#297)
+#### [`draxtCollection.reverse()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L297)
 Reverse the collection's nodes _in place_.
 The first array element becomes the last, and the last array element becomes the first.
 
 → `draxt`
 <br><br>
-#### [`draxtCollection.directories()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#307)
+#### [`draxtCollection.directories()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L307)
 Filter directory nodes (instances of [`Directory`](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md) class) and return a new
 [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection.
 
 → `draxt`
 <br><br>
-#### [`draxtCollection.files()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#317)
+#### [`draxtCollection.files()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L317)
 Filter file nodes (instances of [`File`](https://github.com/ramhejazi/draxt/blob/master/docs/File.md) class) and return a new [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection.
 
 → `draxt`
 <br><br>
-#### [`draxtCollection.symlinks()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#327)
+#### [`draxtCollection.symlinks()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L327)
 Filter symbolic link nodes (instances of [`SymbolicLink`](https://github.com/ramhejazi/draxt/blob/master/docs/SymbolicLink.md) class) and return a new [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection.
 
 → `draxt`
 <br><br>
-#### [`draxtCollection.empty()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#337)
+#### [`draxtCollection.empty()`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L337)
 Empty the [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection. This method doesn't affect file system!
 
 → `draxt`
 <br><br>
-#### [`draxtCollection.drop(node)`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#348)
+#### [`draxtCollection.drop(node)`](https://github.com/ramhejazi/draxt/blob/master/src/draxt.js#L348)
 - `node` (`draxt `|` node `|` array.<(node|string)>`)&nbsp;&nbsp;–&nbsp;&nbsp;Accepts various paramters.
 
 Remove node(s) from the current [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection by using `.pathName`s as the criterion.

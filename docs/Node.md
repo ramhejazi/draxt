@@ -40,40 +40,40 @@ Refers to [`fs-extra`](https://github.com/jprichardson/node-fs-extra) package.
 Refers to [`glob`](https://github.com/isaacs/node-glob) package.
 
 ## Methods
-#### [`node.getPathName()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#66)
+#### [`node.getPathName()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L66)
 Get the node's pathName.
 
 → `string`
 <br><br>
-#### [`node.getBaseName()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#74)
+#### [`node.getBaseName()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L74)
 Get the node's baseName.
 
 → `string`
 <br><br>
-#### [`node.getExtension()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#82)
+#### [`node.getExtension()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L82)
 Get the node's extension.
 
 → `string`
 <br><br>
-#### [`node.getName()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#91)
+#### [`node.getName()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L91)
 Get name of the node.
 For [`File`](https://github.com/ramhejazi/draxt/blob/master/docs/File.md) nodes the `name` property is the name of file without possible extension.
 
 → `string`
 <br><br>
-#### [`node.getParentPath()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#99)
+#### [`node.getParentPath()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L99)
 Get the node's parent directory pathName.
 
 → `string`
 <br><br>
-#### [`node.getCachedStats()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#109)
+#### [`node.getCachedStats()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L109)
 Get cached [`fs.Stats`](https://nodejs.org/api/fs.html#fs_class_fs_stats) instance for the node. Returns `undefined` when there
 is no cached stats for the node. This happens only when the node is created
 manually by user without passing a stats object.
 
 → `object `|` undefined`
 <br><br>
-#### [`node.getStatProp(propName)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#122)
+#### [`node.getStatProp(propName)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L122)
 - `propName` (`string`)
 
 Get a stat property's value from cached [`fs.Stats`](https://nodejs.org/api/fs.html#fs_class_fs_stats) for the node.
@@ -85,63 +85,63 @@ const node_ctime = node.getStatProp('blksize');
 
 → `any`
 <br><br>
-#### [`node.getAccessTime()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#130)
+#### [`node.getAccessTime()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L130)
 Get "access time" of the node. Returns [`atime`](https://nodejs.org/api/fs.html#fs_stats_atime) property of the cached stats.
 
 → `date`
 <br><br>
-#### [`node.getModifiedTime()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#138)
+#### [`node.getModifiedTime()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L138)
 Get "modified time" of the node. Returns [`mtime`](https://nodejs.org/api/fs.html#fs_stats_mtime) property of the cached stats.
 
 → `date`
 <br><br>
-#### [`node.getBirthTime()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#146)
+#### [`node.getBirthTime()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L146)
 Get "birthday time" of the node. Returns [`birthtime`](https://nodejs.org/api/fs.html#fs_stats_birthtime) property of the cached stats.
 
 → `date`
 <br><br>
-#### [`node.getChangeTime()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#154)
+#### [`node.getChangeTime()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L154)
 Get "change time" of the node. Returns [`ctime`](https://nodejs.org/api/fs.html#fs_stats_ctime) property of the cached stats.
 
 → `date`
 <br><br>
-#### [`node.getSize()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#163)
+#### [`node.getSize()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L163)
 Get size of the node.
 Size is simply the `size` property of the cached [`fs.Stats`](https://nodejs.org/api/fs.html#fs_class_fs_stats) instance.
 
 → `number`
 <br><br>
-#### [`node.isDirectory()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#171)
+#### [`node.isDirectory()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L171)
 Is the node a directory?
 
 → `boolean`
 <br><br>
-#### [`node.isFile()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#179)
+#### [`node.isFile()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L179)
 Is the node a file?
 
 → `boolean`
 <br><br>
-#### [`node.isSymbolicLink()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#187)
+#### [`node.isSymbolicLink()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L187)
 Is the node a symbolic link?
 
 → `boolean`
 <br><br>
-#### [`node.isDotFile()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#195)
+#### [`node.isDotFile()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L195)
 Is the node a dot file? i.e. does the node's name begin with dot character.
 
 → `boolean`
 <br><br>
-#### [`node.renewStats()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#203)
+#### [`node.renewStats()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L203)
 Asynchronously renew stats of the node. Uses [`fs.lstat`](https://nodejs.org/api/fs.html#fs_fs_lstat_path_options_callback).
 
 → `promise` A fresh [`fs.Stats`](https://nodejs.org/api/fs.html#fs_class_fs_stats) instance for the node.
 <br><br>
-#### [`node.renewStatsSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#215)
+#### [`node.renewStatsSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L215)
 Synchronously renew stats of the node. Uses [`fs.lstatSync`](https://nodejs.org/api/fs.html#fs_fs_lstatsync_path_options).
 
 → `node`
 <br><br>
-#### [`node.getOctalPermissions()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#227)
+#### [`node.getOctalPermissions()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L227)
 Get octal representation of the node's permissions.
 ```js
 node.getOctalPermissions() // → "755"
@@ -149,7 +149,7 @@ node.getOctalPermissions() // → "755"
 
 → `string`
 <br><br>
-#### [`node.getPermissions()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#244)
+#### [`node.getPermissions()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L244)
 Get permissions of the node for owner, group and others by converting `mode`
 property of cached stats into an object.
 ```js
@@ -164,7 +164,7 @@ node.getPermissions()
 
 → `object`
 <br><br>
-#### [`node.access([mode])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#288)
+#### [`node.access([mode])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L288)
 - `mode` (`integer`)&nbsp;&nbsp;Default: `fs.constants.F_OK`
 
 Asynchronously tests a user's permissions for the file or directory.
@@ -180,42 +180,42 @@ node.access(node.fs.constants.R_OK).then(() => {
 
 → `promise`
 <br><br>
-#### [`node.accessSync([mode])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#298)
+#### [`node.accessSync([mode])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L298)
 - `mode` (`integer`)&nbsp;&nbsp;Default: `fs.constants.F_OK`
 
 Wrapper for [`fs.accessSync`](https://nodejs.org/api/fs.html#fs_fs_accesssync_path_mode).
 
 → `node` this
 <br><br>
-#### [`node.chmod(mode)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#308)
+#### [`node.chmod(mode)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L308)
 - `mode` (`integer`)
 
 Wrapper for promisified [`fs.chmod`](https://nodejs.org/api/fs.html#fs_fs_chmod_path_mode_callback).
 
 → `promise`
 <br><br>
-#### [`node.chmodSync(mode)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#318)
+#### [`node.chmodSync(mode)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L318)
 - `mode` (`integer`)
 
 Wrapper for [`fs.chmodSync`](https://nodejs.org/api/fs.html#fs_fs_chmodsync_path_mode).
 
 → `node` this
 <br><br>
-#### [`node.lchmod(mode)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#328)
+#### [`node.lchmod(mode)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L328)
 - `mode` (`integer`)
 
 Wrapper for promisified [`fs.lchmod`](https://nodejs.org/api/fs.html#fs_fs_lchmod_path_mode_callback).
 
 → `promise`
 <br><br>
-#### [`node.lchmodSync(mode)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#338)
+#### [`node.lchmodSync(mode)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L338)
 - `mode` (`integer`)
 
 Wrapper for [`fs.lchmodSync`](https://nodejs.org/api/fs.html#fs_fs_lchmodsync_path_mode).
 
 → `node`
 <br><br>
-#### [`node.chown(uid, gid)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#349)
+#### [`node.chown(uid, gid)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L349)
 - `uid` (`integer`)&nbsp;&nbsp;–&nbsp;&nbsp;The user id
 - `gid` (`integer`)&nbsp;&nbsp;–&nbsp;&nbsp;The group id
 
@@ -223,7 +223,7 @@ Wrapper for promisified [`fs.chown`](https://nodejs.org/api/fs.html#fs_fs_chown_
 
 → `promise`
 <br><br>
-#### [`node.chownSync(uid, gid)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#360)
+#### [`node.chownSync(uid, gid)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L360)
 - `uid` (`integer`)&nbsp;&nbsp;–&nbsp;&nbsp;The user id
 - `gid` (`integer`)&nbsp;&nbsp;–&nbsp;&nbsp;The group id
 
@@ -231,7 +231,7 @@ Wrapper for [`fs.chownSync`](https://nodejs.org/api/fs.html#fs_fs_chownsync_path
 
 → `node` The file node
 <br><br>
-#### [`node.lchown(uid, gid)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#371)
+#### [`node.lchown(uid, gid)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L371)
 - `uid` (`integer`)&nbsp;&nbsp;–&nbsp;&nbsp;The user id
 - `gid` (`integer`)&nbsp;&nbsp;–&nbsp;&nbsp;The group id
 
@@ -239,7 +239,7 @@ Wrapper for promisified [`fs.lchown`](https://nodejs.org/api/fs.html#fs_fs_lchow
 
 → `promise`
 <br><br>
-#### [`node.lchownSync(uid, gid)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#382)
+#### [`node.lchownSync(uid, gid)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L382)
 - `uid` (`integer`)&nbsp;&nbsp;–&nbsp;&nbsp;The user id
 - `gid` (`integer`)&nbsp;&nbsp;–&nbsp;&nbsp;The group id
 
@@ -247,53 +247,53 @@ Wrapper for [`fs.lchownSync`](https://nodejs.org/api/fs.html#fs_fs_lchownsync_pa
 
 → `node` The file node
 <br><br>
-#### [`node.exists()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#392)
+#### [`node.exists()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L392)
 Does node exist on file system?
 Uses [`fs.access`](https://nodejs.org/api/fs.html#fs_fs_access_path_mode_callback) instead of the deprecated [`fs.exists`](https://nodejs.org/api/fs.html#fs_fs_exists_path_callback) method.
 
 → `promise.<boolean>`
 <br><br>
-#### [`node.existsSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#403)
+#### [`node.existsSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L403)
 Does node exist on file system?
 Wrapper for [`fs.existsSync`](https://nodejs.org/api/fs.html#fs_fs_existssync_path).
 
 → `boolean`
 <br><br>
-#### [`node.stat()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#411)
+#### [`node.stat()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L411)
 Wrapper for promisified [`fs.stat`](https://nodejs.org/api/fs.html#fs_fs_stat_path_options_callback).
 
 → `promise` Promise representing instance of [`fs.Stats`](https://nodejs.org/api/fs.html#fs_class_fs_stats) for the node.
 <br><br>
-#### [`node.statSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#419)
+#### [`node.statSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L419)
 Wrapper for [`fs.statSync`](https://nodejs.org/api/fs.html#fs_fs_statsync_path_options).
 
 → `object` Instance of [`fs.Stats`](https://nodejs.org/api/fs.html#fs_class_fs_stats) for the node.
 <br><br>
-#### [`node.lstat()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#427)
+#### [`node.lstat()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L427)
 Wrapper for promisified [`fs.lstat`](https://nodejs.org/api/fs.html#fs_fs_lstat_path_options_callback).
 
 → `promise` Promise representing instance of [`fs.Stats`](https://nodejs.org/api/fs.html#fs_class_fs_stats) for the node.
 <br><br>
-#### [`node.lstatSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#435)
+#### [`node.lstatSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L435)
 Wrapper for [`fs.lstatSync`](https://nodejs.org/api/fs.html#fs_fs_lstatsync_path_options).
 
 → `object` Instance of [`fs.Stats`](https://nodejs.org/api/fs.html#fs_class_fs_stats) for the node.
 <br><br>
-#### [`node.link(newPath)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#444)
+#### [`node.link(newPath)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L444)
 - `newPath` (`string `|` Buffer `|` URL`)
 
 Wrapper for promisified [`fs.link`](https://nodejs.org/api/fs.html#fs_fs_link_existingpath_newpath_callback).
 
 → `Promise`
 <br><br>
-#### [`node.linkSync(newPath)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#454)
+#### [`node.linkSync(newPath)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L454)
 - `newPath` (`string `|` buffer `|` URL`)
 
 Wrapper for [`fs.linkSync`](https://nodejs.org/api/fs.html#fs_fs_linksync_existingpath_newpath).
 
 → `node`
 <br><br>
-#### [`node.rename(newPath)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#466)
+#### [`node.rename(newPath)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L466)
 - `newPath` (`string `|` Buffer `|` URL`)
 
 Asynchronously rename node to the pathname provided as newPath.
@@ -302,14 +302,14 @@ Wrapper for promisified [`fs.rename`](https://nodejs.org/api/fs.html#fs_fs_renam
 
 → `promise`
 <br><br>
-#### [`node.renameSync(newPath)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#478)
+#### [`node.renameSync(newPath)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L478)
 - `newPath` (`string `|` Buffer `|` URL`)
 
 Wrapper for [`fs.renameSync`](https://nodejs.org/api/fs.html#fs_fs_renamesync_oldpath_newpath).
 
 → `node`
 <br><br>
-#### [`node.utimes(atime, mtime)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#490)
+#### [`node.utimes(atime, mtime)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L490)
 - `atime` (`number `|` string `|` Date`)
 - `mtime` (`number `|` string `|` Date`)
 
@@ -317,7 +317,7 @@ Wrapper for promisified [`fs.utimes`](https://nodejs.org/api/fs.html#fs_fs_utime
 
 → `promise`
 <br><br>
-#### [`node.utimesSync(atime, mtime)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#501)
+#### [`node.utimesSync(atime, mtime)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L501)
 - `atime` (`number `|` string `|` Date`)
 - `mtime` (`number `|` string `|` Date`)
 
@@ -325,7 +325,7 @@ Wrapper for [`fs.utimesSync`](https://nodejs.org/api/fs.html#fs_fs_utimessync_pa
 
 → `node`
 <br><br>
-#### [`node.copy(destPath, options)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#522)
+#### [`node.copy(destPath, options)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L522)
 - `destPath` (`string`)&nbsp;&nbsp;–&nbsp;&nbsp;Destination path.
 - `options` (`object`)&nbsp;&nbsp;–&nbsp;&nbsp;Options for [`fs-extra.copy`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/copy.md).
 
@@ -344,7 +344,7 @@ file.copy('/app/backup/backup_style.css').then(() => {
 
 → `promise`
 <br><br>
-#### [`node.copySync(destPath, options)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#533)
+#### [`node.copySync(destPath, options)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L533)
 - `destPath` (`string`)&nbsp;&nbsp;–&nbsp;&nbsp;Destination path.
 - `options` (`object`)&nbsp;&nbsp;–&nbsp;&nbsp;Options for [`fs-extra.copySync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/copy-sync.md).
 
@@ -352,7 +352,7 @@ Wrapper for [`fs-extra.copySync`](https://github.com/jprichardson/node-fs-extra/
 
 → `node`
 <br><br>
-#### [`node.moveTo(targetDir, options)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#557)
+#### [`node.moveTo(targetDir, options)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L557)
 - `targetDir` (`object `|` string`)&nbsp;&nbsp;–&nbsp;&nbsp;[`Directory`](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md) instance or absolute path of the target directory.
 - `options` (`object`)&nbsp;&nbsp;–&nbsp;&nbsp;Options for [`fs-extra.move`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/move.md).
 
@@ -374,7 +374,7 @@ node.moveTo(dir || '/app/target_dir').then(() => {
 
 → `promise`
 <br><br>
-#### [`node.moveToSync(targetDir, options)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#580)
+#### [`node.moveToSync(targetDir, options)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L580)
 - `targetDir` (`object `|` string`)&nbsp;&nbsp;–&nbsp;&nbsp;[`Directory`](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md) instance or absolute path of the target directory.
 - `options` (`object`)&nbsp;&nbsp;–&nbsp;&nbsp;Options for [`fs-extra.move`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/move.md).
 
@@ -382,15 +382,15 @@ Synchronous version of `node.moveTo`.
 
 → `node`
 <br><br>
-#### [`node.appendTo()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#590)
+#### [`node.appendTo()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L590)
 Alias for `node.moveTo`.
 <br><br>
-#### [`node.appendToSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#599)
+#### [`node.appendToSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L599)
 Alias for `node.moveToSync`.
 
 → `node`
 <br><br>
-#### [`node.siblings([patten, options])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#610)
+#### [`node.siblings([patten, options])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L610)
 - `patten` (`string`)&nbsp;&nbsp;Default: `'*'`&nbsp;&nbsp;–&nbsp;&nbsp;Optional [`glob`](https://github.com/isaacs/node-glob) pattern.
 - `options` (`object`)&nbsp;&nbsp;–&nbsp;&nbsp;Options for [`glob`](https://github.com/isaacs/node-glob) package.
 
@@ -399,7 +399,7 @@ Uses [`glob`](https://github.com/isaacs/node-glob) package.
 
 → `promise.<draxt>` Promise representing a [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection.
 <br><br>
-#### [`node.siblingsSync([pattern, options])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#629)
+#### [`node.siblingsSync([pattern, options])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L629)
 - `pattern` (`string`)&nbsp;&nbsp;Default: `'*'`&nbsp;&nbsp;–&nbsp;&nbsp;Optional [`glob`](https://github.com/isaacs/node-glob) pattern.
 - `options` (`object`)&nbsp;&nbsp;–&nbsp;&nbsp;Options for [`glob`](https://github.com/isaacs/node-glob) package.
 
@@ -408,18 +408,18 @@ Uses [`glob`](https://github.com/isaacs/node-glob) package.
 
 → `draxt` A [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection.
 <br><br>
-#### [`node.remove()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#645)
+#### [`node.remove()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L645)
 Remove the node from file system! [`Directory`](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md) nodes can have contents. Like `rm -rf`.
 Wrapper for [`fs-extra.remove`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/remove.md).
 
 → `promise`
 <br><br>
-#### [`node.removeSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#654)
+#### [`node.removeSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L654)
 Wrapper for [`fs-extra.removeSync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/remove-sync.md).
 
 → `node`
 <br><br>
-#### [`node.parent()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#670)
+#### [`node.parent()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L670)
 Asynchronously get parent directory node of the node. It's an async method
 as it gets an instance of [`fs.Stats`](https://nodejs.org/api/fs.html#fs_class_fs_stats) for the parent node asynchronously!
 ```js
@@ -432,13 +432,13 @@ file.parent().then(dir => {
 
 → `promise.<node>` Promise representing a [`Directory`](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md) instance.
 <br><br>
-#### [`node.parentSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#681)
+#### [`node.parentSync()`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L681)
 Synchronously get parent directory node of the node.
 
 → `node` A [`Directory`](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md) instance.
 <br><br>
 ## Methods
-#### [`Node.rawQuery(pattern [, options])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#693)
+#### [`Node.rawQuery(pattern [, options])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L693)
 - `pattern` (`string`)&nbsp;&nbsp;–&nbsp;&nbsp;Pattern for [`glob`](https://github.com/isaacs/node-glob) package.
 - `options` (`object`)&nbsp;&nbsp;–&nbsp;&nbsp;Options for [`glob`](https://github.com/isaacs/node-glob) package.
 
@@ -446,7 +446,7 @@ Asynchronously query the file system by using [`glob`](https://github.com/isaacs
 
 → `promise.<array>` An array of pathNames.
 <br><br>
-#### [`Node.rawQuerySync(pattern [, options])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#712)
+#### [`Node.rawQuerySync(pattern [, options])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L712)
 - `pattern` (`string`)&nbsp;&nbsp;–&nbsp;&nbsp;Pattern for [`glob`](https://github.com/isaacs/node-glob) package.
 - `options` (`object`)&nbsp;&nbsp;–&nbsp;&nbsp;Options for [`glob`](https://github.com/isaacs/node-glob) package.
 
@@ -454,7 +454,7 @@ Synchronously query the file system by using [`glob`](https://github.com/isaacs/
 
 → `array` An array of pathNames.
 <br><br>
-#### [`Node.toNodes(pathNames)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#735)
+#### [`Node.toNodes(pathNames)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L735)
 - `pathNames` (`array`)&nbsp;&nbsp;–&nbsp;&nbsp;Array of pathNames.
 
 Convert array of paths to array of node instances asynchronously!
@@ -475,7 +475,7 @@ Node.toNodes(pathNames).then(result => {
 
 → `promise.<array>` Array of node instances.
 <br><br>
-#### [`Node.toNodesSync(pathNames)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#751)
+#### [`Node.toNodesSync(pathNames)`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L751)
 - `pathNames` (`array`)&nbsp;&nbsp;–&nbsp;&nbsp;Array of paths
 
 Convert array of paths to array of nodes synchronously!
@@ -483,7 +483,7 @@ A node instance can be instance of [`File`](https://github.com/ramhejazi/draxt/b
 
 → `array` Array of node instances.
 <br><br>
-#### [`Node.query(pattern [, options])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#783)
+#### [`Node.query(pattern [, options])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L783)
 - `pattern` (`string`)&nbsp;&nbsp;–&nbsp;&nbsp;A [`glob`](https://github.com/isaacs/node-glob) pattern.
 - `options` (`object`)&nbsp;&nbsp;–&nbsp;&nbsp;Options for [`glob`](https://github.com/isaacs/node-glob) package.
 
@@ -491,7 +491,7 @@ Asynchronously query the file system by using [`glob`](https://github.com/isaacs
 
 → `promise.<draxt>` A [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection.
 <br><br>
-#### [`Node.querySync(pattern [, options])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#794)
+#### [`Node.querySync(pattern [, options])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L794)
 - `pattern` (`string`)
 - `options` (`object`)&nbsp;&nbsp;–&nbsp;&nbsp;Options for [`glob`](https://github.com/isaacs/node-glob) package.
 
