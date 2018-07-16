@@ -211,7 +211,7 @@ class Doc {
 		let memberof = method.memberof;
 		memberof = method.scope === 'instance' ? this.instanceName : this.clsName;
 		const methodPath = inherited ? this.baseClsDoc.relativeSrcPath : this.relativeSrcPath;
-		const methodSrcLink = `${repoPath}/${methodPath}#${method.meta.lineno}`;
+		const methodSrcLink = `${repoPath}/${methodPath}#L${method.meta.lineno}`;
 		const params = Doc.getParamNames(method);
 		const rets = Doc.getReturnValues(method);
 		let methodDef = `#### [\`${memberof}.${method.name}(${params})\`](${methodSrcLink})`;
