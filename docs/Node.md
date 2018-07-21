@@ -489,7 +489,7 @@ A node instance can be instance of [`File`](https://github.com/ramhejazi/draxt/b
 
 Asynchronously query the file system by using [`glob`](https://github.com/isaacs/node-glob) package.
 
-→ `promise.<draxt>` A [`draxt`](https://github.com/ramhejazi/draxt/blob/master/docs/Draxt.md) collection.
+→ `promise.<array>` Array of nodes.
 <br><br>
 #### [`Node.querySync(pattern [, options])`](https://github.com/ramhejazi/draxt/blob/master/src/interfaces/Node.js#L794)
 - `pattern` (`string`)
