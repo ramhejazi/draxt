@@ -21,41 +21,52 @@ It uses [`glob`](https://en.wikipedia.org/wiki/Glob_(programming)) patterns as i
 > _draxt_ means _tree_ in the [Pahlavi language](https://en.wikipedia.org/wiki/Middle_Persian).
 
 ```html
-/app
+/app/
  ├── controllers/
  │   └── index.js
  ├── public/
  │   ├── script.js
  │   └── style.css
  └── views/
-     └── index.njk/
+     └── index.njk
 ```
 
 ```js
 // Let's use a familiar variable name!
-const $ = require('draxt')
+const $ = require('draxt');
 
 (async () => {
   // Select `/app` directory contents and create a new `draxt` collection.
-  const $app = await $('/app/**')
+  const $app = await $('/app/**');
   $app
     // Let's filter js files:
     .filter(node => node.extension === 'js')
     // Now we have a new `draxt` collection with 2 nodes.
     .forEach(async (node, index, allNodes) => {
       // `node` is instance of `File` class. Because it's a file!
-      console.log(node.pathName); // → `/app/controllers/index.js` for the first node!
-      console.log(node instanceof $.File) // → `true`
+      console.log(node.pathName);
+      // → `'/app/controllers/index.js'` for the first node!
+
+      console.log(node instanceof $.File); // → `true`
 
       // Let's get contents of the node. `file.read` returns a promise object.
       const content = await node.read('utf8');
+
       // Let's use some synchronous methods!
       node.appendSync('\na new line!')
           .chmodSync('765')
           // move the file into another directory!
-          .appendToSync('/hell'); // or `.moveTo('/hell')`
+          .appendToSync('/hell') // or `.moveToSync('/hell')`
 
-      console.log(node.pathName) // → '/hell/index.js' for the first node in the list!
+      console.log(node.pathName);
+      // → `'/hell/index.js'` for the first node in the list!
+
+      // get the parent directory of the node.
+      // returns a `Directory` instance with the pathName of `'/hell'`!
+      const parentNode = node.parentSync(); // or `await node.parent()`
+
+      // is the directory empty?
+      console.log(parentNode.isEmptySync()); // → `false`
   });
 })();
 ```
@@ -66,15 +77,15 @@ const $ = require('draxt')
  - Each item in a `draxt` collection is an instance of a [`File`](https://github.com/ramhejazi/draxt/blob/master/docs/File.md), [`Directory`](https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md), or [`SymbolicLink`](https://github.com/ramhejazi/draxt/blob/master/docs/SymbolicLink.md) class, which is a subclass of [`Node`](https://github.com/ramhejazi/draxt/blob/master/docs/Node.md).
  - Every asynchronous method has a synchronous version. E.g., [`node.siblingsSync()`](https://github.com/ramhejazi/draxt/blob/master/docs/Node.md#nodesiblingssyncpattern-options) for `node.siblings()`.
  - `draxt` is a simple constructor function. You can extend/overwrite its methods via its `prototype` property (or its `fn` alias) or by using the [`draxt.extend`](https://github.com/ramhejazi/draxt/blob/master/docs/draxt.md#draxtextendmethods) method.
- 
+
  ```js
  const draxt = require('draxt');
- // add a method (`images`) for filtering image files.
+ // Add a method (`images`) for filtering image files.
  draxt.fn.images = function() {
      const imgExtensions = ['jpeg', 'jpg', 'png', 'git', ...];
      return this.filter(node => {
         return node.isFile() && imgExtensions.indexOf(node.extension) > -1;
-     })
+     });
  }
 ```
 
