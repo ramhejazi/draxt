@@ -778,7 +778,7 @@ class Node {
 	 * Asynchronously query the file system by using `glob` package.
 	 * @param {string} pattern A `glob` pattern.
 	 * @param {object} [options] Options for `glob` package.
-	 * @returns {promise<draxt>} A `draxt` collection.
+	 * @returns {promise<array>} Array of nodes.
 	 */
 	static query() {
 		const { rawQuery, toNodes } = Node;
