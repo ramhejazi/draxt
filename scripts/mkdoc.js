@@ -123,15 +123,6 @@ class Doc {
 				}
 				params += `${optional.join(', ')}]`;
 			}
-			// method.params.map((param, index) => {
-			// 	// default value
-			// 	//const dv = param.defaultvalue ? '=' + param.defaultvalue : '';
-			// 	if (param.optional) {
-			// 		params += `[${index > 0 ? ', ' : ''}${param.name}]`;
-			// 	} else {
-			// 		params += `${index > 0 ? ', ' : ''}${param.name}`;
-			// 	}
-			// });
 		}
 		return params;
 	}
@@ -173,10 +164,6 @@ class Doc {
 			this.baseClsDoc.methods.instance.forEach(method => {
 				this.addMethod(method, true);
 			});
-			// this.add(Doc.linkify('### Static Methods'));
-			// this.baseClsDoc.methods.static.forEach(method => {
-			// 	this.addMethod(method, true);
-			// });
 		}
 	}
 
