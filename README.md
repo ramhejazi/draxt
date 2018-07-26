@@ -1,16 +1,16 @@
 <div align="center">
 	<h1>draxt.js</h1>
 	<a href="https://travis-ci.org/ramhejazi/draxt">
- 		<img src="https://img.shields.io/travis/ramhejazi/draxt.svg">
+ 		<img src="https://img.shields.io/travis/ramhejazi/draxt.svg?style=flat-square">
 	</a>
 	<a href="https://www.npmjs.com/package/draxt">
 		<img alt="draxt npm version" src="https://img.shields.io/npm/v/draxt.svg?style=flat-square">
 	</a>
 	<a href="https://coveralls.io/github/ramhejazi/draxt">
-		<img alt="draxt coverage status" src="https://coveralls.io/repos/github/ramhejazi/draxt/badge.svg">
+		<img alt="draxt coverage status" src="https://img.shields.io/coveralls/github/ramhejazi/draxt.svg?style=flat-square">
 	</a>
 	<a href="https://github.com/ramhejazi/draxt/blob/master/LICENSE">
-		<img alt="draxt license" src="https://img.shields.io/npm/l/draxt.svg">
+		<img alt="draxt license" src="https://img.shields.io/npm/l/draxt.svg?style=flat-square">
 	</a>
 </div>
 <br>
