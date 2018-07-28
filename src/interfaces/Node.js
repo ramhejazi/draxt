@@ -13,9 +13,6 @@ const defaultNodeProps = {
 	'NODE_TYPE': { value: 0, writable: false, configurable: true, enumerable: true }
 }
 
-// Add missinig promisified `lchmod` in fs-extra module.
-// @see https://github.com/jprichardson/node-fs-extra/issues/595
-fs.lchmod = require('universalify').fromCallback(fs.lchmod);
 
 /**
  * Node class is an interface that other classes representing
