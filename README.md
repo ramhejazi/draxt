@@ -1,19 +1,13 @@
-<p align="center" style="text-align:center">
-	
-[![draxt.js logo](draxt-logo.jpg)][repo]
-
-</p>
-
-<p align="center" style="text-align:center">
-	
-[![draxt license][license-badge]][license]
-[![npm-link][npm-badge]][npm-link]
-[![draxt build state][travis-badge]][travis-link]
-[![draxt coverage status][coverall-badge]][coverall]
-[![dependencies status][deps-status-badge]][deps-status-link]
-
-</p>
+<div align="center" style="text-align:center">
+<a link="https://github.com/ramhejazi/draxt"><img alt="draxt.js logo" src="draxt-logo.jpg"></a><br>
+<a href="https://github.com/ramhejazi/draxt/blob/master/LICENSE"><img alt="draxt license" src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square"></a>
+<a href="https://www.npmjs.com/package/draxt"><img alt="npm-link" src="https://img.shields.io/npm/v/draxt.svg?style=flat-square"></a>
+<a href="https://travis-ci.org/ramhejazi/draxt"><img alt="draxt build state" src="https://img.shields.io/travis/ramhejazi/draxt.svg?style=flat-square"></a>
+<a href="https://coveralls.io/github/ramhejazi/draxt"><img alt="draxt coverage status" src="https://img.shields.io/coveralls/github/ramhejazi/draxt.svg?style=flat-square"></a>
+<a href="https://david-dm.org/ramhejazi/draxt"><img alt="dependencies status" src="https://david-dm.org/ramhejazi/draxt.svg?style=flat-square"></a>
+</div>
 <br>
+
 `draxt` is a utility module for selecting and manipulating filesystem objects in a Node.js environment.
 It uses [glob] patterns as its "selector engine". `draxt` also provides several DOM-like interfaces representing filesystem objects which build on promisified APIs for the [`fs`] and [`fs-extra`] modules.
 
