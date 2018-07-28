@@ -1,12 +1,18 @@
-<div align="center" style="text-align:center">
+<p align="center" style="text-align:center">
+	
 [![draxt.js logo](draxt-logo.jpg)][repo]
-</div><div align="center" style="text-align:center">
+
+</p>
+
+<p align="center" style="text-align:center">
+	
 [![draxt license][license-badge]][license]
 [![npm-link][npm-badge]][npm-link]
 [![draxt build state][travis-badge]][travis-link]
 [![draxt coverage status][coverall-badge]][coverall]
 [![dependencies status][deps-status-badge]][deps-status-link]
-</div>
+
+</p>
 <br>
 `draxt` is a utility module for selecting and manipulating filesystem objects in a Node.js environment.
 It uses [glob] patterns as its "selector engine". `draxt` also provides several DOM-like interfaces representing filesystem objects which build on promisified APIs for the [`fs`] and [`fs-extra`] modules.
