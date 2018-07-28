@@ -1,5 +1,5 @@
 <div align="center">
-	<h1>draxt.js</h1>
+  <img src="draxt-logo.jpg" align=center><br>
 	<a href="https://travis-ci.org/ramhejazi/draxt">
  		<img src="https://img.shields.io/travis/ramhejazi/draxt.svg?style=flat-square">
 	</a>
@@ -10,7 +10,7 @@
 		<img alt="draxt coverage status" src="https://img.shields.io/coveralls/github/ramhejazi/draxt.svg?style=flat-square">
 	</a>
 	<a href="https://github.com/ramhejazi/draxt/blob/master/LICENSE">
-		<img alt="draxt license" src="https://img.shields.io/npm/l/draxt.svg?style=flat-square">
+		<img alt="draxt license" src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square">
 	</a>
 </div>
 <br>
