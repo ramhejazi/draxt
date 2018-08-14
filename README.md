@@ -137,11 +137,11 @@ $ npm test
 [`glob`]: https://github.com/isaacs/node-glob
 [Pahlavi language]: https://en.wikipedia.org/wiki/Middle_Persian
 
-[draxt-doc]: https://github.com/ramhejazi/draxt/blob/master/docs/draxt.md
-[`Node`]: https://github.com/ramhejazi/draxt/blob/master/docs/Node.md
-[`File`]: https://github.com/ramhejazi/draxt/blob/master/docs/File.md
-[`Directory`]: https://github.com/ramhejazi/draxt/blob/master/docs/Directory.md
-[`SymbolicLink`]: https://github.com/ramhejazi/draxt/blob/master/docs/SymbolicLink.md
-[`draxt.extend`]: https://github.com/ramhejazi/draxt/blob/master/docs/draxt.md#draxtextendmethods
-[`node.siblingsSync()`]: https://github.com/ramhejazi/draxt/blob/master/docs/Node.md#nodesiblingssyncpattern-options
-[`node.siblings()`]: https://github.com/ramhejazi/draxt/blob/master/docs/Node.md#nodesiblingspatten-options
+[draxt-doc]: https://ramhejazi.github.io/draxt#draxt
+[`Node`]: https://ramhejazi.github.io/draxt#intefaces-node
+[`File`]: https://ramhejazi.github.io/draxt#interfaces-file
+[`Directory`]: https://ramhejazi.github.io/draxt#interfaces-directory
+[`SymbolicLink`]: https://ramhejazi.github.io/draxt#interfaces-symboliclink
+[`draxt.extend`]: https://ramhejazi.github.io/draxt#draxt-extend
+[`node.siblingsSync()`]: https://ramhejazi.github.io/draxt#node-siblings
+[`node.siblings()`]: https://ramhejazi.github.io/draxt#node-siblings
