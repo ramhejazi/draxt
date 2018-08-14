@@ -5,7 +5,6 @@
   "author": "Ram Hejazi",
   "main": "src/draxt.js",
   "scripts": {
-    "mkdoc": "node ./scripts/mkdoc.js",
     "test": "nyc --reporter=text --reporter=html ./node_modules/mocha/bin/mocha test/* -r chai/register-expect",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -44,7 +43,6 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "coveralls": "^3.0.2",
-    "jsdoc-api": "^4.0.3",
     "mocha": "^5.2.0",
     "mock-fs": "^4.5.0",
     "nyc": "^12.0.2"
