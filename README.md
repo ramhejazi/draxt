@@ -138,7 +138,7 @@ $ npm test
 [Pahlavi language]: https://en.wikipedia.org/wiki/Middle_Persian
 
 [draxt-doc]: https://ramhejazi.github.io/draxt#draxt
-[`Node`]: https://ramhejazi.github.io/draxt#intefaces-node
+[`Node`]: https://ramhejazi.github.io/draxt#interfaces-node
 [`File`]: https://ramhejazi.github.io/draxt#interfaces-file
 [`Directory`]: https://ramhejazi.github.io/draxt#interfaces-directory
 [`SymbolicLink`]: https://ramhejazi.github.io/draxt#interfaces-symboliclink
