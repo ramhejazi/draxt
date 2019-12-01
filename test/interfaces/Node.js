@@ -474,7 +474,7 @@ describe('Node', function() {
 			return node.moveTo('/fake_dir').then(function() {
 				expect(node.pathName).to.eql('/fake_dir/c.php');
 				expect(() => node.moveTo('/fake_dir/', function() {})).to.throw('callback');
-				expect(() => node.appendToSync('/fake_dir/store')).to.throw('EEXIST');
+				expect(() => node.appendToSync('/fake_dir/store')).to.throw('dest already exists.');
 				return node.appendTo('/fake_dir/store', { overwrite: true }).then(function() {
 					expect(node.pathName).to.eql('/fake_dir/store/c.php');
 					expect(node.fs.readFileSync(node.pathName, 'utf8')).to.eql('c.php content!');
