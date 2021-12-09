@@ -1,10 +1,9 @@
 <div align="center" style="text-align:center">
-<a link="https://github.com/ramhejazi/draxt"><img alt="draxt.js logo" src="draxt-logo.jpg"></a><br>
+<a link="https://github.com/ramhejazi/draxt"><img width="300px" style="padding: 20px" alt="draxt.js logo" src="draxt-logo.svg"></a><br>
 <a href="https://github.com/ramhejazi/draxt/blob/master/LICENSE"><img alt="draxt license" src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square"></a>
 <a href="https://www.npmjs.com/package/draxt"><img alt="npm-link" src="https://img.shields.io/npm/v/draxt.svg?style=flat-square"></a>
 <a href="https://travis-ci.org/ramhejazi/draxt"><img alt="draxt build state" src="https://img.shields.io/travis/ramhejazi/draxt.svg?style=flat-square"></a>
 <a href="https://coveralls.io/github/ramhejazi/draxt"><img alt="draxt coverage status" src="https://img.shields.io/coveralls/github/ramhejazi/draxt.svg?style=flat-square"></a>
-<a href="https://david-dm.org/ramhejazi/draxt"><img alt="dependencies status" src="https://david-dm.org/ramhejazi/draxt.svg?style=flat-square"></a>
 </div>
 <br>
 
