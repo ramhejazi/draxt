@@ -1,7 +1,7 @@
 /* global expect, describe, beforeEach, afterEach, it*/
 const mockFs = require('mock-fs');
 const { SymbolicLink } = require('../../src/draxt').Node;
-
+const { expect } = require('chai');
 describe('SymbolicLink', () => {
 	describe('initialization and basic methods', () => {
 		const nodePath = '/fake/_fakepath'

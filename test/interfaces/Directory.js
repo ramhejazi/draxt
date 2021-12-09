@@ -1,6 +1,7 @@
 /* global expect, describe, beforeEach, afterEach, it*/
 const mockFs = require('mock-fs');
 const Draxt = require('../../src/draxt');
+const { expect } = require('chai');
 const { Directory, File } = Draxt.Node;
 const shouldNotPass = function() { throw new Error('should not pass!') }
 

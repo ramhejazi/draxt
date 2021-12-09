@@ -2,6 +2,7 @@
 const
 	mockFs = require('mock-fs'),
 	draxt = require('../src/draxt'),
+    { expect } = require('chai'),
 	{ Node } = draxt
 ;
 

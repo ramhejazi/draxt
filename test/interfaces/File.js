@@ -1,6 +1,7 @@
 /* global expect, describe, beforeEach, afterEach, it*/
 const mockFs = require('mock-fs');
 const { File } = require('../../src/draxt').Node;
+const { expect } = require('chai');
 
 describe('File', () => {
 	describe('initialization', () => {
