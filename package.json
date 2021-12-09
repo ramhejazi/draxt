@@ -1,6 +1,6 @@
 {
   "name": "draxt",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "jQuery/NodeList-like module for file system (nodejs)",
   "author": "Ram Hejazi",
   "main": "src/draxt.js",
