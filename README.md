@@ -9,6 +9,8 @@
 `draxt` is a utility module for selecting and manipulating filesystem objects in a Node.js environment.
 It uses [glob] patterns as its "selector engine". `draxt` also provides several DOM-like interfaces representing filesystem objects which build on promisified APIs for the [`fs`] and [`fs-extra`] modules.
 
+**Example directory structure:**
+
 ```html
 /app/ ├── controllers/ │   └── index.js ├── public/ │   ├── script.js │   └── style.css └── views/
 └── index.njk
@@ -39,7 +41,7 @@ const $ = require('draxt');
             node.appendSync('\na new line!')
                 .chmodSync('765')
                 // move the file into another directory!
-                .appendToSync('/hell'); // or `.moveToSync('/hell')`
+                .appendToSync('/tmp'); // or `.moveToSync('/tmp')`
 
             console.log(node.pathName);
             // → '/hell/index.js' for the first node in the list!
