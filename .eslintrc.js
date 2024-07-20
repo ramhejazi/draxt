@@ -1,26 +1,17 @@
 module.exports = {
-    "env": {
-        "commonjs": true,
-        "es6": true,
-        "node": true
+    env: {
+        commonjs: true,
+        es6: true,
+        node: true,
     },
-    "globals": {
-        "console": true
+    globals: {
+        console: true,
     },
-    "extends": "eslint:recommended",
-    "rules": {
-        "no-console": 0,
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            1,
-            "single"
-        ]
-    }
+    extends: 'eslint:recommended',
+    rules: {
+        indent: ['error', 4],
+        'no-console': 0,
+        'linebreak-style': ['error', 'unix'],
+        quotes: [1, 'single'],
+    },
 };
