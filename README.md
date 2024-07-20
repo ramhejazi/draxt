@@ -105,8 +105,12 @@ $ yarn add draxt
 
 ## Test
 
+In the past, mock-fs was used for mocking test file system, but since the package is not compatible with
+newer versions of node.js, now regular linux cmds like `mkdir` and `echo` are used for creating test files and
+folders. The test fs structure are created in `/tmp` directory. That being said, for now, tests only work on Linux!
+
 ```bash
-$ npm test
+$ npm run test
 ```
 
 ## License
