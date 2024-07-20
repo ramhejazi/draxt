@@ -1,5 +1,5 @@
 const path = require('path'),
-    glob = require('glob'),
+    {glob, globSync} = require('glob'),
     fs = require('fs-extra'),
     minimatch = require('minimatch'),
     {getType} = require('../util'),
@@ -687,15 +687,7 @@ class Node {
      */
     static rawQuery(pattern, options) {
         options = Node.__normalizeGlobOptions(options);
-        return new Promise((resolve, reject) => {
-            glob(pattern, options, (err, items) => {
-                /* istanbul ignore if */
-                if (err) {
-                    return reject(err);
-                }
-                resolve(items);
-            });
-        });
+        return glob(pattern, options);
     }
 
     /**
@@ -706,7 +698,7 @@ class Node {
      */
     static rawQuerySync(pattern, options) {
         options = Node.__normalizeGlobOptions(options);
-        return glob.sync(pattern, options);
+        return globSync(pattern, options);
     }
 
     /**

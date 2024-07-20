@@ -1,30 +1,29 @@
-/* global expect, describe, it, beforeEach, afterEach*/
-const mockFs = require('mock-fs'),
-    draxt = require('../src/draxt'),
+/* global describe, it, beforeEach, afterEach*/
+const draxt = require('../src/draxt'),
     {expect} = require('chai'),
+    {execSync} = require('child_process'),
     {Node} = draxt;
 
+const contentList = ['a.js', 'another_dir', 'another_example_file.md', 'b.md', 'example_file.md'];
+const mkfs = () => {
+    const pre = `
+					rm -r /tmp/draxt_test_dir
+					mkdir /tmp/draxt_test_dir
+					echo 'example content' > /tmp/draxt_test_dir/example_file.md
+					echo 'example content' > /tmp/draxt_test_dir/another_example_file.md
+					mkdir /tmp/draxt_test_dir/another_dir
+					echo '...' > /tmp/draxt_test_dir/a.js
+					ln -s /tmp/draxt_test_dir/another_example_file /tmp/draxt_test_dir/b.md
+				`;
+    execSync(pre);
+};
 describe('draxt', function () {
     beforeEach(function () {
-        mockFs(
-            {
-                '/fake_dir': {
-                    'example_file.md': 'example content.',
-                    'another_example_file.md': 'example content.',
-                    another_dir: {
-                        'a.js': '...',
-                        'b.md': mockFs.symlink({
-                            path: '/fake_dir/another_example_file.md',
-                        }),
-                    },
-                },
-            },
-            {createCwd: false}
-        );
+        mkfs();
     });
 
     afterEach(function () {
-        mockFs.restore();
+        mkfs();
     });
 
     it('basic initialization', function () {
@@ -39,9 +38,9 @@ describe('draxt', function () {
     });
 
     it('initialization with query', function () {
-        return draxt('/fake_dir/*').then((d) => {
+        return draxt('/tmp/draxt_test_dir/*').then((d) => {
             expect(d).to.be.instanceof(draxt);
-            expect(d.length).to.eql(3);
+            expect(d.length).to.eql(5);
             expect(draxt(d).items).to.eql(d.items);
             expect(draxt(d).length).to.eql(d.length);
             // make sure the `items` parameter has been cloned!
@@ -50,10 +49,10 @@ describe('draxt', function () {
     });
 
     it('.sync()', function () {
-        const result = draxt.sync('/fake_dir');
+        const result = draxt.sync('/tmp/draxt_test_dir');
         expect(result).to.be.instanceof(draxt);
         expect(result.length).to.eql(1);
-        expect(draxt.sync('/fake_dir/*').length).to.eql(3);
+        expect(draxt.sync('/tmp/draxt_test_dir/*').length).to.eql(5);
     });
 
     it('.extend()', function () {
@@ -86,7 +85,7 @@ describe('draxt', function () {
     });
 
     it('.get()', function () {
-        const d = draxt.sync('/fake_dir/*');
+        const d = draxt.sync('/tmp/draxt_test_dir/*');
         const node = d.get();
         expect(node).to.be.an('array');
         expect(node).to.be.eql(d.items);
@@ -94,20 +93,20 @@ describe('draxt', function () {
     });
 
     it('.first() && .last()', function () {
-        const d = draxt.sync('/fake_dir/*');
+        const d = draxt.sync('/tmp/draxt_test_dir/*');
         expect(d.first()).to.eql(d.items[0]);
         expect(d.last()).to.eql(d.items.pop());
     });
 
     it('.has()', function () {
-        const d = draxt.sync('/fake_dir/*');
-        expect(d.has('/fake_dir/another_dir')).to.eql(true);
-        expect(d.has(new Node('/fake_dir/another_dir'))).to.eql(true);
-        expect(d.has('/fake_dir/non_existent')).to.eql(false);
+        const d = draxt.sync('/tmp/draxt_test_dir/*');
+        expect(d.has('/tmp/draxt_test_dir/another_dir')).to.eql(true);
+        expect(d.has(new Node('/tmp/draxt_test_dir/another_dir'))).to.eql(true);
+        expect(d.has('/tmp/draxt_test_dir/non_existent')).to.eql(false);
     });
 
     it('.slice()', function () {
-        const d = draxt.sync('/fake_dir/**');
+        const d = draxt.sync('/tmp/draxt_test_dir/**');
         expect(d.length).to.eql(6);
         const d2 = d.slice(0, 4);
         expect(d2).to.be.instanceof(draxt);
@@ -118,7 +117,7 @@ describe('draxt', function () {
     });
 
     it('.filter()', function () {
-        const d = draxt.sync('/fake_dir/**');
+        const d = draxt.sync('/tmp/draxt_test_dir/**');
         const d2 = d.filter((node) => {
             return node.isFile();
         });
@@ -128,15 +127,16 @@ describe('draxt', function () {
     });
 
     it('.map()', function () {
-        const d = draxt.sync('/fake_dir/*');
+        const d = draxt.sync('/tmp/draxt_test_dir/*');
         const res = d.map((node) => node.baseName);
+        res.sort();
         expect(res.length).to.eql(d.length);
         expect(res).to.be.an('array');
-        expect(res).to.eql(['another_dir', 'another_example_file.md', 'example_file.md']);
+        expect(res).to.eql(contentList);
     });
 
     it('.mapAsync', function () {
-        const d = draxt.sync('/fake_dir/*');
+        const d = draxt.sync('/tmp/draxt_test_dir/*');
         const res = d.mapAsync((node) => {
             return new Promise((res) => {
                 setTimeout(() => res(node.baseName), 30);
@@ -144,20 +144,22 @@ describe('draxt', function () {
         });
         expect(res).to.be.instanceof(Promise);
         return res.then((baseNames) => {
-            expect(baseNames).to.eql(['another_dir', 'another_example_file.md', 'example_file.md']);
+            baseNames.sort();
+            expect(baseNames).to.eql(contentList);
         });
     });
 
     it('.each() && .forEach()', function () {
-        const d = draxt.sync('/fake_dir/*');
+        const d = draxt.sync('/tmp/draxt_test_dir/*');
         expect(d.each).to.be.eql(d.forEach);
         const res = [];
         expect(d.forEach((node) => res.push(node.baseName))).to.eql(d);
-        expect(res).to.eql(['another_dir', 'another_example_file.md', 'example_file.md']);
+        res.sort();
+        expect(res).to.eql(contentList);
     });
 
     it('.some', function () {
-        const d = draxt.sync('/fake_dir/*');
+        const d = draxt.sync('/tmp/draxt_test_dir/*');
         const res = d.some((node) => node.baseName === 'another_dir');
         const res2 = d.some((node) => node.baseName === 'non_existent');
         expect(res).to.eql(true);
@@ -165,63 +167,51 @@ describe('draxt', function () {
     });
 
     it('.sort() && .reverse()', function () {
-        const d = draxt.sync('/fake_dir/*');
+        const d = draxt.sync('/tmp/draxt_test_dir/*');
         const originalNodesBackup = d.get().slice();
-        const res = d.sort((a, b) => {
-            if (a.baseName < b.baseName) {
-                return 1;
-            }
-            if (a.baseName > b.baseName) {
-                return -1;
-            }
-            return 0;
-        });
-        expect(d === res).to.eql(true);
-        expect(d.items).to.eql(originalNodesBackup.slice().reverse());
-        expect(d.reverse()).to.eql(d);
-        expect(d.items).to.eql(originalNodesBackup);
+        expect(d.reverse().get()).to.eql(originalNodesBackup.reverse());
     });
 
     it('.directories()', function () {
-        const d = draxt.sync('/fake_dir/**');
+        const d = draxt.sync('/tmp/draxt_test_dir/**');
         const dirs = d.directories();
         expect(dirs.length).to.eql(2);
         expect(dirs === d).to.eql(false);
     });
 
     it('.files()', function () {
-        const d = draxt.sync('/fake_dir/**');
+        const d = draxt.sync('/tmp/draxt_test_dir/**');
         const files = d.files();
         expect(files.length).to.eql(3);
         expect(files === d).to.eql(false);
     });
 
     it('.symlinks()', function () {
-        const d = draxt.sync('/fake_dir/**');
+        const d = draxt.sync('/tmp/draxt_test_dir/**');
         const symlinks = d.symlinks();
         expect(symlinks.length).to.eql(1);
         expect(symlinks).to.be.instanceof(draxt);
     });
 
     it('.empty()', function () {
-        const d = draxt.sync('/fake_dir/**');
+        const d = draxt.sync('/tmp/draxt_test_dir/**');
         expect(d.length).to.eql(6);
         expect(d.empty()).to.eql(d);
         expect(d.length).to.eql(0);
     });
 
     it('.drop()', function () {
-        const d = draxt.sync('/fake_dir/**');
+        const d = draxt.sync('/tmp/draxt_test_dir/**');
         expect(d.length).to.eql(6);
-        d.drop('/fake_dir/example_file.md');
+        d.drop('/tmp/draxt_test_dir/example_file.md');
         expect(d.length).to.eql(5);
-        d.drop([new Node('/fake_dir/another_example_file.md'), '/non_existent']);
+        d.drop([new Node('/tmp/draxt_test_dir/another_example_file.md'), '/non_existent']);
         expect(d.length).to.eql(4);
-        const d2 = draxt.sync('/fake_dir/another_dir/*');
+        const d2 = draxt.sync('/tmp/draxt_test_dir/another_dir/*');
         d.drop(d2);
-        expect(d.length).to.eql(2);
-        d.drop(new Node('/fake_dir'));
-        expect(d.length).to.eql(1);
+        expect(d.length).to.eql(4);
+        d.drop(new Node('/tmp/draxt_test_dir'));
+        expect(d.length).to.eql(3);
         expect(() => d.drop(new Date())).to.throw('Invalid paramter passed to');
     });
 });

@@ -1,5 +1,4 @@
-/* global expect, describe, beforeEach, afterEach, it*/
-const mockFs = require('mock-fs');
+/* global describe, beforeEach, afterEach, it*/
 const {File} = require('../../src/draxt').Node;
 const {expect} = require('chai');
 
@@ -17,22 +16,24 @@ describe('File', () => {
 
     describe('fs methods', () => {
         beforeEach(() => {
-            mockFs({
-                '/fake_dir': {
-                    'example_file.md': 'example content.',
-                    'another_example_file.md': 'example content.',
-                },
-            });
+            const {execSync} = require('child_process');
+            const pre = `
+								rm -r /tmp/fake_dir
+								mkdir /tmp/fake_dir
+								echo 'example content.' > /tmp/fake_dir/example_file.md
+								echo 'example content.' > /tmp/fake_dir/another_example_file.md
+						`;
+            execSync(pre);
         });
 
         afterEach(() => {
-            mockFs.restore();
+            // vol.reset();
         });
 
         it('.read() && .readSync()', () => {
-            const file = new File('/fake_dir/example_file.md', {});
+            const file = new File('/tmp/fake_dir/example_file.md', {});
             const content = file.readSync('utf8');
-            const expectContent = 'example content.';
+            const expectContent = 'example content.\n';
             expect(content).to.eql(expectContent);
             return file.read('utf8').then((content) => {
                 expect(content).to.eql(expectContent);
@@ -40,19 +41,19 @@ describe('File', () => {
         });
 
         it('.append() && .appendSync()', () => {
-            const file = new File('/fake_dir/example_file.md', {});
-            const ret = file.appendSync(' eppended content');
+            const file = new File('/tmp/fake_dir/example_file.md', {});
+            const ret = file.appendSync(' appended content');
             expect(ret).to.eql(file);
-            expect(file.readSync('utf8')).to.eql('example content. eppended content');
+            expect(file.readSync('utf8')).to.eql('example content.\n appended content');
             return file.append('. string').then(() => {
                 return file.read('utf8').then((content) => {
-                    expect(content).to.eql('example content. eppended content. string');
+                    expect(content).to.eql('example content.\n appended content. string');
                 });
             });
         });
 
         it('.write() && .writeSync()', () => {
-            const file = new File('/fake_dir/example_file.md', {});
+            const file = new File('/tmp/fake_dir/example_file.md', {});
             const ret = file.writeSync('new content');
             expect(ret).to.eql(file);
             expect(file.readSync('utf8')).to.eql('new content');
@@ -64,7 +65,7 @@ describe('File', () => {
         });
 
         it('.truncate() && .truncateSync()', () => {
-            const file = new File('/fake_dir/example_file.md', {});
+            const file = new File('/tmp/fake_dir/example_file.md', {});
             const ret = file.truncateSync(4);
             expect(ret).to.eql(file);
             expect(file.readSync('utf8')).to.eql('exam');
@@ -76,8 +77,8 @@ describe('File', () => {
         });
 
         it('.ensure() && .ensureSync()', () => {
-            const file = new File('/fake_dir/non_existent.md');
-            const file2 = new File('/fake_dir/non_existent2.md');
+            const file = new File('/tmp/fake_dir/non_existent.md');
+            const file2 = new File('/tmp/fake_dir/non_existent2.md');
             expect(file.existsSync()).to.eql(false);
             expect(file.ensureSync()).to.eql(file);
             expect(file.existsSync()).to.eql(true);

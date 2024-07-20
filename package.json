@@ -1,50 +1,54 @@
 {
-  "name": "draxt",
-  "version": "1.2.0",
-  "description": "jQuery/NodeList-like module for file system (nodejs)",
-  "author": "Ram Hejazi",
-  "main": "src/draxt.js",
-  "scripts": {
-    "test": "nyc --reporter=text --reporter=html ./node_modules/mocha/bin/mocha test/*",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ramhejazi/draxt.git"
-  },
-  "keywords": [
-    "fs",
-    "file",
-    "file system",
-    "directory",
-    "folder",
-    "read",
-    "write",
-    "move",
-    "mv",
-    "cp",
-    "copy",
-    "jquery",
-    "node",
-    "chainable",
-    "collection",
-    "utility",
-    "plugin"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ramhejazi/draxt/issues"
-  },
-  "homepage": "https://github.com/ramhejazi/draxt",
-  "dependencies": {
-    "fs-extra": "^10.1.0",
-    "glob": "^7.2.3"
-  },
-  "devDependencies": {
-    "chai": "^4.3.10",
-    "coveralls": "^3.1.1",
-    "mocha": "^9.2.2",
-    "mock-fs": "^5.2.0",
-    "nyc": "^15.1.0"
-  }
+    "name": "draxt",
+    "version": "1.3.0",
+    "description": "jQuery/NodeList-like module for file system (nodejs)",
+    "author": "Ram Hejazi",
+    "main": "src/draxt.js",
+    "scripts": {
+        "test": "nyc --reporter=text --reporter=html ./node_modules/mocha/bin/mocha test/*",
+        "coverage": "nyc report --reporter=text-lcov | coveralls"
+    },
+    "homepage": "https://github.com/ramhejazi/draxt",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ramhejazi/draxt.git"
+    },
+    "keywords": [
+        "fs",
+        "file",
+        "file system",
+        "directory",
+        "folder",
+        "read",
+        "write",
+        "move",
+        "mv",
+        "cp",
+        "copy",
+        "jquery",
+        "node",
+        "chainable",
+        "collection",
+        "utility",
+        "plugin"
+    ],
+    "bugs": {
+        "url": "https://github.com/ramhejazi/draxt/issues"
+    },
+    "engines": {
+        "node": "20 || >=22"
+    },
+    "dependencies": {
+        "fs-extra": "^11.2.0",
+        "glob": "^11.0.0"
+    },
+    "devDependencies": {
+        "chai": "^4.3.10",
+        "coveralls": "^3.1.1",
+        "memfs": "^4.9.3",
+        "mocha": "^9.2.2",
+        "mock-fs": "^5.2.0",
+        "nyc": "^15.1.0"
+    }
 }

@@ -1,7 +1,7 @@
-/* global expect, describe, beforeEach, afterEach, it*/
-const mockFs = require('mock-fs');
+/* global describe, beforeEach, it*/
 const {SymbolicLink} = require('../../src/draxt').Node;
 const {expect} = require('chai');
+
 describe('SymbolicLink', () => {
     describe('initialization and basic methods', () => {
         const nodePath = '/fake/_fakepath';
@@ -28,37 +28,34 @@ describe('SymbolicLink', () => {
 
     describe('fs methods', () => {
         beforeEach(() => {
-            mockFs({
-                '/fake_dir': {
-                    'example_file.md': 'example content.',
-                    childdir: {
-                        'sym1.md': mockFs.symlink({
-                            path: '/fake_dir/example_file.md',
-                        }),
-                        sym2: mockFs.symlink({
-                            path: '/fake_dir/non_existent.md',
-                        }),
-                    },
-                },
-            });
+            const {execSync} = require('child_process');
+            const pre = `
+								rm -r /tmp/fake_dir
+								mkdir /tmp/fake_dir
+								mkdir /tmp/fake_dir/childdir
+								echo 'example content.' > /tmp/fake_dir/example_file.md
+								ln -s /tmp/fake_dir/example_file.md /tmp/fake_dir/childdir/sym1.md
+								ln -s /tmp/fake_dir/non_existent.md /tmp/fake_dir/childdir/sym2
+						`;
+            execSync(pre);
         });
 
-        afterEach(() => {
-            mockFs.restore();
-        });
+        // afterEach(() => {
+        //     vol.reset();
+        // });
 
         it('.readlink() && .readlink()', () => {
-            const sym1 = new SymbolicLink('/fake_dir/childdir/sym1.md');
-            const sym2 = new SymbolicLink('/fake_dir/childdir/sym2');
-            expect(sym1.readlinkSync()).to.eql('/fake_dir/example_file.md');
+            const sym1 = new SymbolicLink('/tmp/fake_dir/childdir/sym1.md');
+            const sym2 = new SymbolicLink('/tmp/fake_dir/childdir/sym2');
+            expect(sym1.readlinkSync()).to.eql('/tmp/fake_dir/example_file.md');
             return sym2.readlink().then((pathName) => {
-                expect(pathName).to.eql('/fake_dir/non_existent.md');
+                expect(pathName).to.eql('/tmp/fake_dir/non_existent.md');
             });
         });
 
         it('.isBroken() && .isBrokenSync()', () => {
-            const sym1 = new SymbolicLink('/fake_dir/childdir/sym1.md');
-            const sym2 = new SymbolicLink('/fake_dir/childdir/sym2');
+            const sym1 = new SymbolicLink('/tmp/fake_dir/childdir/sym1.md');
+            const sym2 = new SymbolicLink('/tmp/fake_dir/childdir/sym2');
             expect(sym1.isBrokenSync()).to.eql(false);
             return sym2.isBroken().then((ret) => {
                 expect(ret).to.eql(true);
