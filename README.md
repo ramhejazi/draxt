@@ -11,17 +11,22 @@ It uses [glob] patterns as its "selector engine". `draxt` also provides several 
 
 **Example directory structure:**
 
-```html
-/app/ ├── controllers/ │   └── index.js ├── public/ │   ├── script.js │   └── style.css └── views/
-└── index.njk
+```
+/app/
+ ├── controllers/
+ │   └── index.js
+ ├── public/
+ │   ├── script.js
+ │   └── style.css
+ └── views/
+     └── index.html
 ```
 
 ```js
-// Let's use a familiar variable name!
 const $ = require('draxt');
 
 (async () => {
-    // Select `/app` directory contents and create a new `draxt` collection.
+    // Select `/app` directory content and create a new `draxt` collection.
     const $app = await $('/app/**');
     $app
         // Let's filter js files:
@@ -47,7 +52,7 @@ const $ = require('draxt');
             // → '/hell/index.js' for the first node in the list!
 
             // get the parent directory of the node.
-            // returns a `Directory` instance with the pathName of '/hell'!
+            // returns a `Directory` instance with the pathName of '/tmp'!
             const parentNode = node.parentSync(); // or `await node.parent()`
 
             // is the directory empty?
