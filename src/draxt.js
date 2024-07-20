@@ -1,15 +1,15 @@
 /*eslint no-irregular-whitespace: ["error", { "skipComments": true }]*/
 
-const { Node } = require('./interfaces');
+const {Node} = require('./interfaces');
 const assign = Object.assign;
-const { getType } = require('./util');
+const {getType} = require('./util');
 const define = Object.defineProperty;
 const lengthProps = {
-	get() {
-		return this.items.length;
-	},
-	enumerable: true,
-	configurable: true,
+    get() {
+        return this.items.length;
+    },
+    enumerable: true,
+    configurable: true,
 };
 
 /**
@@ -66,32 +66,32 @@ const lengthProps = {
  * const draxtCollection = draxt(new Directory('/app'));
  */
 function Draxt(pattern, options = {}) {
-	// If `this` is not a Draxt instance, create a Draxt instance.
-	if ( this instanceof Draxt !== true ) {
-		return new Draxt(...arguments);
-	}
-	// Define dynamic `length` property.
-	define(this, 'length', lengthProps);
-	// `items` refers to collection's node.
-	this.items = [];
+    // If `this` is not a Draxt instance, create a Draxt instance.
+    if (this instanceof Draxt !== true) {
+        return new Draxt(...arguments);
+    }
+    // Define dynamic `length` property.
+    define(this, 'length', lengthProps);
+    // `items` refers to collection's node.
+    this.items = [];
 
-	if ( getType(pattern) === 'undefined' ) {
-		return this;
-	}
+    if (getType(pattern) === 'undefined') {
+        return this;
+    }
 
-	if ( pattern instanceof Node || Array.isArray(pattern) ) {
-		this.add(pattern);
-		return this;
-	}
+    if (pattern instanceof Node || Array.isArray(pattern)) {
+        this.add(pattern);
+        return this;
+    }
 
-	if ( pattern instanceof Draxt ) {
-		this.items = pattern.get().slice();
-		return this;
-	}
+    if (pattern instanceof Draxt) {
+        this.items = pattern.get().slice();
+        return this;
+    }
 
-	return Node.query(pattern, options).then(items => {
-		return this.add(items);
-	});
+    return Node.query(pattern, options).then((items) => {
+        return this.add(items);
+    });
 }
 
 Node.Draxt = Draxt;
@@ -108,18 +108,18 @@ Draxt.fn = Draxt.prototype;
  * @param {object} [options] Options for `glob` package.
  * @returns {draxt} An instance of `draxt`, a.k.a. a _draxt collection_.
  */
-Draxt.sync = function() {
-	const items = Node.querySync(...arguments);
-	return new Draxt(items);
-}
+Draxt.sync = function () {
+    const items = Node.querySync(...arguments);
+    return new Draxt(items);
+};
 
 /**
  * Extend `draxt` by adding methods to it's `prototype`. Basically works like `jQuery.fn.extend`.
  * @param {object} methods
  */
-Draxt.extend = function(methods) {
-	assign(Draxt.fn, methods);
-}
+Draxt.extend = function (methods) {
+    assign(Draxt.fn, methods);
+};
 
 /**
  * Add node(s) to current `draxt` collection.
@@ -131,23 +131,25 @@ Draxt.extend = function(methods) {
  * draxtCollection.add(new Node('/pathName'));
  * draxtCollection.length // → 1
  */
-Draxt.prototype.add = function(items) {
-	if ( items instanceof Draxt ) {
-		items = items.get();
-	}
-	const nodes = Array.isArray(items) ? items.slice() : [items];
-	nodes.forEach(node => {
-		if ( !(node instanceof Node) ) {
-			throw new Error(
-				'Invalid value for `items` parameter. `draxt` collection can only have Node instances. '
-				+ 'The given value is a(n) ' +  getType(node) + '!'
-			);
-		}
-		const has = this.has(node);
-		if (!has) this.items.push(node);
-	});
-	return this;
-}
+Draxt.prototype.add = function (items) {
+    if (items instanceof Draxt) {
+        items = items.get();
+    }
+    const nodes = Array.isArray(items) ? items.slice() : [items];
+    nodes.forEach((node) => {
+        if (!(node instanceof Node)) {
+            throw new Error(
+                'Invalid value for `items` parameter. `draxt` collection can only have Node instances. ' +
+                    'The given value is a(n) ' +
+                    getType(node) +
+                    '!'
+            );
+        }
+        const has = this.has(node);
+        if (!has) this.items.push(node);
+    });
+    return this;
+};
 
 /**
  * Get one or all nodes from the `draxt` collection.
@@ -156,28 +158,28 @@ Draxt.prototype.add = function(items) {
  * @param {number} [index] - Index of node in items collection.
  * @returns {array<node>|node|undefined}
  */
-Draxt.prototype.get = function(index) {
-	if ( typeof index === 'undefined' ) {
-		return this.items;
-	}
-	return this.items[index];
-}
+Draxt.prototype.get = function (index) {
+    if (typeof index === 'undefined') {
+        return this.items;
+    }
+    return this.items[index];
+};
 
 /**
  * Get the first node (if any) from the collection.
  * @returns {node|undefined}
  */
-Draxt.prototype.first = function() {
-	return this.items[0];
-}
+Draxt.prototype.first = function () {
+    return this.items[0];
+};
 
 /**
  * Get the last node (if any) from the collection.
  * @returns {node|undefined}
  */
-Draxt.prototype.last = function() {
-	return this.items[this.items.length - 1];
-}
+Draxt.prototype.last = function () {
+    return this.items[this.items.length - 1];
+};
 
 /**
  * Does the `draxt` collection has a node with specified pathName?
@@ -196,11 +198,11 @@ Draxt.prototype.last = function() {
  * draxtCollection.has('/app/public/script.js') // → true
  * draxtCollection.has(new Node('/app/public/script.js')) // → true
  */
-Draxt.prototype.has = function(item) {
-	const pathName = item instanceof Node ? item.pathName : item;
-	const found = this.items.some(node => node.pathName === pathName);
-	return found;
-}
+Draxt.prototype.has = function (item) {
+    const pathName = item instanceof Node ? item.pathName : item;
+    const found = this.items.some((node) => node.pathName === pathName);
+    return found;
+};
 
 /**
  * Slice the collection and return a new `Draxt` collection.
@@ -209,10 +211,10 @@ Draxt.prototype.has = function(item) {
  * @param {integer} [end] Zero-based index before which to end extraction. `slice` extracts up to but not including `end`.
  * @returns {draxt} A new `draxt` collection which contains sliced items.
  */
-Draxt.prototype.slice = function() {
-	let sItems = this.items.slice(...arguments);
-	return new Draxt(sItems);
-}
+Draxt.prototype.slice = function () {
+    let sItems = this.items.slice(...arguments);
+    return new Draxt(sItems);
+};
 
 /**
  * Filter the collection's nodes and return a new `draxt` collection.
@@ -221,10 +223,10 @@ Draxt.prototype.slice = function() {
  * @param {any} [thisArg] Value to use as `this` (i.e the reference Object) when executing callback.
  * @returns {draxt} A new `draxt` collection which contains filtered items.
  */
-Draxt.prototype.filter = function() {
-	let fItems = this.items.filter(...arguments);
-	return new Draxt(fItems);
-}
+Draxt.prototype.filter = function () {
+    let fItems = this.items.filter(...arguments);
+    return new Draxt(fItems);
+};
 
 /**
  * Iterate over the `draxt` collection and execute a function for each
@@ -234,10 +236,10 @@ Draxt.prototype.filter = function() {
  * @param {any} [thisArg] Value to use as `this` (i.e the reference Object) when executing callback.
  * @returns {draxt} The current collection.
  */
-Draxt.prototype.forEach = function() {
-	this.items.forEach(...arguments);
-	return this;
-}
+Draxt.prototype.forEach = function () {
+    this.items.forEach(...arguments);
+    return this;
+};
 
 /**
  * Alias for `draxt.forEach`.
@@ -252,9 +254,9 @@ Draxt.prototype.each = Draxt.prototype.forEach;
  * @param {any} [thisArg] Value to use as `this` (i.e the reference Object) when executing callback.
  * @returns {array}
  */
-Draxt.prototype.map = function() {
-	return this.items.map(...arguments);
-}
+Draxt.prototype.map = function () {
+    return this.items.map(...arguments);
+};
 
 /**
  * Asynchronous version of `draxt.map`. The results of mapped array is passed
@@ -263,9 +265,9 @@ Draxt.prototype.map = function() {
  * @param {any} [thisArg] Value to use as `this` (i.e the reference Object) when executing callback.
  * @returns {promise}
  */
-Draxt.prototype.mapAsync = function() {
-	return Promise.all(this.items.map(...arguments));
-}
+Draxt.prototype.mapAsync = function () {
+    return Promise.all(this.items.map(...arguments));
+};
 
 /**
  * Test whether at least one node in the collection passes the test implemented
@@ -274,9 +276,9 @@ Draxt.prototype.mapAsync = function() {
  * @param {function} fn A function to execute for each node.
  * @returns {boolean}
  */
-Draxt.prototype.some = function() {
-	return this.items.some(...arguments);
-}
+Draxt.prototype.some = function () {
+    return this.items.some(...arguments);
+};
 
 /**
  * Sort the nodes of collection _in place_ and return the `draxt` collection.
@@ -284,20 +286,20 @@ Draxt.prototype.some = function() {
  * @param {function} callback A function that defines the sort order.
  * @returns {draxt} Note that the collection is sorted _in place_, and no copy is made.
  */
-Draxt.prototype.sort = function(fn) {
-	this.items.sort(fn);
-	return this;
-}
+Draxt.prototype.sort = function (fn) {
+    this.items.sort(fn);
+    return this;
+};
 
 /**
  * Reverse the collection's nodes _in place_.
  * The first array element becomes the last, and the last array element becomes the first.
  * @returns {draxt}
  */
-Draxt.prototype.reverse = function() {
-	this.items.reverse();
-	return this;
-}
+Draxt.prototype.reverse = function () {
+    this.items.reverse();
+    return this;
+};
 
 /**
  * Filter directory nodes (instances of `Directory` class) and return a new
@@ -305,38 +307,38 @@ Draxt.prototype.reverse = function() {
  * @returns {draxt}
  */
 Draxt.prototype.directories = function () {
-	return this.filter(el => {
-		return el.isDirectory();
-	});
-}
+    return this.filter((el) => {
+        return el.isDirectory();
+    });
+};
 
 /**
  * Filter file nodes (instances of `File` class) and return a new `draxt` collection.
  * @returns {draxt}
  */
-Draxt.prototype.files = function() {
-	return this.filter(el => {
-		return el.isFile();
-	});
-}
+Draxt.prototype.files = function () {
+    return this.filter((el) => {
+        return el.isFile();
+    });
+};
 
 /**
-* Filter symbolic link nodes (instances of `SymbolicLink` class) and return a new `draxt` collection.
+ * Filter symbolic link nodes (instances of `SymbolicLink` class) and return a new `draxt` collection.
  * @returns {draxt}
  */
-Draxt.prototype.symlinks = function() {
-	return this.filter(el => {
-		return el.isSymbolicLink();
-	});
-}
+Draxt.prototype.symlinks = function () {
+    return this.filter((el) => {
+        return el.isSymbolicLink();
+    });
+};
 
 /**
  * Empty the `draxt` collection. This method doesn't affect file system!
  * @returns {draxt}
  */
-Draxt.prototype.empty = function() {
-	this.items = [];
-	return this;
+Draxt.prototype.empty = function () {
+    this.items = [];
+    return this;
 };
 
 /**
@@ -345,31 +347,29 @@ Draxt.prototype.empty = function() {
  * @param {draxt|node|array<node|string>} node Accepts various paramters.
  * @return {draxt}
  */
-Draxt.prototype.drop = function(node) {
-	let nodes;
-	if ( node instanceof Node ) {
-		nodes = [node];
-	} else if ( node instanceof Draxt ) {
-		nodes = node.get();
-	} else if ( getType(node) === 'string' ) {
-		nodes = [node];
-	} else if ( Array.isArray(node) ) {
-		nodes = node;
-	} else {
-		throw new Error('Invalid paramter passed to `.drop()` method');
-	}
-	const pathNames = nodes.map(item => {
-		if ( typeof item === 'string' ) {
-			return item;
-		}
-		return item.pathName;
-	});
-	this.items = this.items.filter(node => {
-		return pathNames.indexOf(node.pathName) === -1;
-	})
-	return this;
-}
-
-
+Draxt.prototype.drop = function (node) {
+    let nodes;
+    if (node instanceof Node) {
+        nodes = [node];
+    } else if (node instanceof Draxt) {
+        nodes = node.get();
+    } else if (getType(node) === 'string') {
+        nodes = [node];
+    } else if (Array.isArray(node)) {
+        nodes = node;
+    } else {
+        throw new Error('Invalid paramter passed to `.drop()` method');
+    }
+    const pathNames = nodes.map((item) => {
+        if (typeof item === 'string') {
+            return item;
+        }
+        return item.pathName;
+    });
+    this.items = this.items.filter((node) => {
+        return pathNames.indexOf(node.pathName) === -1;
+    });
+    return this;
+};
 
 module.exports = Draxt;
